@@ -18,12 +18,14 @@ namespace FinFinder
             {
                 options.UseSqlServer(connectionString);
             });
+
             builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             {
 
             })
             .AddRoles<IdentityRole<Guid>>()
             .AddEntityFrameworkStores<FinFinderDbContext>();
+
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

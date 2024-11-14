@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FinFinder.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a9af1cae26c3d678f11364e0c6d54cc6f9c28352")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5eaf856408a688913cc1806940aa42cded50cb16")]
 [assembly: System.Reflection.AssemblyProductAttribute("FinFinder.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FinFinder.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
