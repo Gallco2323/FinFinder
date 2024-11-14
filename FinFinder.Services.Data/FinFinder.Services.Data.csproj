@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FinFinder.Data.Models\FinFinder.Data.Models.csproj" />
+    <ProjectReference Include="..\FinFinder.Data\FinFinder.Data.csproj" />
+    <ProjectReference Include="..\FinFinder.Web.ViewModels\FinFinder.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>
