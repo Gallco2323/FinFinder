@@ -9,3 +9,4 @@ D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\Common\
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\Common\obj\Debug\net8.0\refint\FinFinder.Common.dll
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\Common\obj\Debug\net8.0\FinFinder.Common.pdb
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\Common\obj\Debug\net8.0\ref\FinFinder.Common.dll
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\Common\obj\Debug\net8.0\FinFinder.Common.sourcelink.json

@@ -1,4 +1,5 @@
 using FinFinder.Data;
+using FinFinder.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,13 @@ namespace FinFinder
             {
                 options.UseSqlServer(connectionString);
             });
-               
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+            {
+
+            })
+            .AddRoles<IdentityRole<Guid>>()
+            .AddEntityFrameworkStores<FinFinderDbContext>();
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -42,6 +49,8 @@ namespace FinFinder
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -15,3 +15,4 @@ D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFind
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Web.ViewModels\obj\Debug\net8.0\refint\FinFinder.Web.ViewModels.dll
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Web.ViewModels\obj\Debug\net8.0\FinFinder.Web.ViewModels.pdb
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Web.ViewModels\obj\Debug\net8.0\ref\FinFinder.Web.ViewModels.dll
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Web.ViewModels\obj\Debug\net8.0\FinFinder.Web.ViewModels.sourcelink.json

@@ -92,7 +92,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\Common\\FinFinder.Common.csproj": {
+                "projectPath": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\Common\\FinFinder.Common.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
