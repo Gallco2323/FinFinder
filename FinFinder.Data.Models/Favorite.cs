@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinFinder.Data.Models
 {
-    [PrimaryKey(nameof(UserId),nameof(UserId))]
+    [PrimaryKey(nameof(UserId),nameof(FishCatchId))]
     public class Favorite
     {
         

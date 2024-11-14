@@ -52,8 +52,7 @@ namespace FinFinder.Data.Models
         // Foreign Keys
         [Required]
         public Guid UserId { get; set; } 
-        [Required]
-        public Guid ObservationId { get; set; }
+       
         [Required]
         public Guid FishingTechniqueId { get; set; }
 
@@ -62,7 +61,7 @@ namespace FinFinder.Data.Models
         [ForeignKey(nameof(UserId))]
         public ApplicationUser User { get; set; } = null!;
 
-        [ForeignKey(nameof(ObservationId))]
+        [Required]
         public Observation? Observation { get; set; } 
 
         [ForeignKey((nameof(FishingTechniqueId)))]

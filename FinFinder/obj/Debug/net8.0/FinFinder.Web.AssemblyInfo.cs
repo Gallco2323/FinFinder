@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FinFinder.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dffbce2514179374501721bea2930886307fe3f1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a9af1cae26c3d678f11364e0c6d54cc6f9c28352")]
 [assembly: System.Reflection.AssemblyProductAttribute("FinFinder.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FinFinder.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
