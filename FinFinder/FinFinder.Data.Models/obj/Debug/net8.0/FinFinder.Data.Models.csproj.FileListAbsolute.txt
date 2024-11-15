@@ -1,0 +1,16 @@
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\bin\Debug\net8.0\FinFinder.Data.Models.deps.json
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\bin\Debug\net8.0\FinFinder.Data.Models.dll
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\bin\Debug\net8.0\FinFinder.Data.Models.pdb
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\obj\Debug\net8.0\FinFinder.Data.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\obj\Debug\net8.0\FinFinder.Data.Models.AssemblyInfoInputs.cache
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\obj\Debug\net8.0\FinFinder.Data.Models.AssemblyInfo.cs
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\obj\Debug\net8.0\FinFinder.Data.Models.csproj.CoreCompileInputs.cache
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\obj\Debug\net8.0\FinFinder.Data.Models.dll
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\obj\Debug\net8.0\refint\FinFinder.Data.Models.dll
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\obj\Debug\net8.0\FinFinder.Data.Models.pdb
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\obj\Debug\net8.0\ref\FinFinder.Data.Models.dll
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\obj\Debug\net8.0\FinFinder.Data.Models.csproj.AssemblyReference.cache
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\bin\Debug\net8.0\FinFinder.Common.dll
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\bin\Debug\net8.0\FinFinder.Common.pdb
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\obj\Debug\net8.0\FinFinder.Data.Models.sourcelink.json
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder.Data.Models\obj\Debug\net8.0\FinFinder.Data.Models.csproj.CopyComplete
