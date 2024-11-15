@@ -1,0 +1,27 @@
+﻿using FinFinder.Web.ViewModels.FishCatch;
+@model FishCatchDetailsViewModel
+
+<h1>@Model.Species</h1>
+<img src="@(Model.PhotoURL ?? "/images/default-fish.jpg")" alt="Fish Photo" class="img-fluid mb-3" />
+
+<div>
+    <p><strong>Description:</strong> @Model.Description</p>
+    <p><strong>Weight:</strong> @Model.Weight kg</p>
+    <p><strong>Length:</strong> @Model.Length cm</p>
+    <p><strong>Bait:</strong> @Model.Bait</p>
+    <p><strong>Location:</strong> @Model.Location</p>
+    <p><strong>Technique Used:</strong> @Model.FishingTechniqueName</p>
+    <p><strong>Date Caught:</strong> @Model.DateCaught.ToString("MMMM dd, yyyy")</p>
+</div>
+
+<hr />
+
+<!-- Publisher Information -->
+<h3>Publisher</h3>
+<div class="media">
+    <img src="@(Model.PublisherProfilePictureURL ?? "/images/default-profile.jpg")" alt="@Model.PublisherName" class="mr-3 rounded-circle" style="width: 50px; height: 50px;">
+    <div class="media-body">
+        <h5 class="mt-0">@Model.PublisherName</h5>
+        <p>@Model.PublisherBio</p>
+    </div>
+</div>

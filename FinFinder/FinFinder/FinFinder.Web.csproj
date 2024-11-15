@@ -29,4 +29,8 @@
     <ProjectReference Include="..\FinFinder.Web.ViewModels\FinFinder.Web.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>

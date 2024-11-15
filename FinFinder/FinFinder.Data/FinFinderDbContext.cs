@@ -3,6 +3,7 @@ using FinFinder.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace FinFinder.Data
 {
@@ -25,6 +26,12 @@ namespace FinFinder.Data
             base.OnModelCreating(builder);
 
             // Additional configuration for entities if needed
+            builder.Entity<FishingTechnique>().HasData(
+        new FishingTechnique { Id = Guid.NewGuid(), Name = "Fly Fishing" },
+        new FishingTechnique { Id = Guid.NewGuid(), Name = "Spin Fishing" },
+        new FishingTechnique { Id = Guid.NewGuid(), Name = "Bait Fishing" },
+        new FishingTechnique { Id = Guid.NewGuid(), Name = "Trolling" }
+    );
         }
     }
 }

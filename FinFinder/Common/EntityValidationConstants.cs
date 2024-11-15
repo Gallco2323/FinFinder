@@ -18,7 +18,7 @@ namespace FinFinder.Common
         public static class FishCatch
         {
             public const int SpeciesMaxLength = 100;
-            public const int SpeciesMinLength = 100;
+            public const int SpeciesMinLength = 2;
             public const int DescriptionMaxLength = 500;
             public const int DescriptionMinLength = 20;
             
