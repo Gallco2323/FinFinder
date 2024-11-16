@@ -13,6 +13,8 @@ namespace FinFinder.Common
             public const int ProfilePictureUrlMaxLength = 200;
             public const int BioMaxLength = 500;
             public const int BioMinLength = 5;
+            public const int UserNameMinLength = 2;
+            public const int UserNameMaxLength = 50;
         }
 
         public static class FishCatch

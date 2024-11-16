@@ -19,9 +19,26 @@ namespace FinFinder.Web.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var fishCatches = await _context.FishCatches
+                .AsNoTracking()
+                .Include(f => f.User) // Include the publisher details
+                .ToListAsync();
+
+            var model = fishCatches.Select(f => new FishCatchIndexViewModel
+            {
+                Id = f.Id,
+                Species = f.Species,
+                Location = f.Location,
+                DateCaught = f.DateCaught,
+                PhotoURL = f.PhotoURL ?? "/images/default-fish.jpg", // Default image if PhotoURL is null
+                PublisherName = f.User.UserName,
+                PublisherId = f.UserId.ToString()
+            }).ToList();
+
+            return View(model);
         }
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -82,9 +99,84 @@ namespace FinFinder.Web.Controllers
 
         }
 
-
         [HttpGet]
-        // GET: FishCatch/Details/5
+        public async Task<IActionResult> Edit(Guid? id)
+        {
+            if (id == null) return NotFound();
+
+            var fishCatch = await _context.FishCatches.FindAsync(id);
+            if (fishCatch == null || fishCatch.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                return Unauthorized();
+
+            var model = new FishCatchEditViewModel()
+            {
+                Id = fishCatch.Id,
+                Species = fishCatch.Species,
+                Description = fishCatch.Description,
+                Weight = fishCatch.Weight,
+                Length = fishCatch.Length,
+                Location = fishCatch.Location,
+                FishingTechniqueId = fishCatch.FishingTechniqueId,
+                PhotoUrl = fishCatch.PhotoURL,
+                FishingTechniques = this._context.FishingTechniques.ToList()
+            };
+
+            
+            
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Guid id, FishCatchEditViewModel model)
+        {
+            if (id != model.Id)
+            {
+                return NotFound();
+            }
+
+            ModelState.Remove("Photo");
+            if (!ModelState.IsValid)
+            {
+                model.FishingTechniques =await  _context.FishingTechniques.ToListAsync();
+                return View(model);
+            }
+                var fishCatch = await _context.FishCatches.FindAsync(id);
+                if (fishCatch == null || fishCatch.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                {
+                    return Unauthorized();
+                }
+
+                fishCatch.Species = model.Species;
+                fishCatch.Description = model.Description;
+                fishCatch.Weight = model.Weight;
+                fishCatch.Length = model.Length;
+                fishCatch.Location = model.Location;
+                fishCatch.FishingTechniqueId = model.FishingTechniqueId;
+
+                // Check if a new photo was uploaded
+                if (model.Photo != null)
+                {
+                    // Save the new photo
+                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                    var uniqueFileName = $"{Guid.NewGuid()}_{model.Photo.FileName}";
+                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.Photo.CopyToAsync(fileStream);
+                    }
+
+                    // Set the new photo URL
+                    fishCatch.PhotoURL = $"/images/{uniqueFileName}";
+                }
+
+                _context.Update(fishCatch);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+
+
+            [HttpGet]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null) return NotFound();

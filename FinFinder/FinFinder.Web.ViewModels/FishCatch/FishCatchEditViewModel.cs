@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using FinFinder.Data.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -40,10 +42,15 @@ namespace FinFinder.Web.ViewModels.FishCatch
 
         public required string Location { get; set; }
 
+
+        public IFormFile? Photo { get; set; }
+
+
+        public string? PhotoUrl { get; set; }
         [Required]
         public Guid FishingTechniqueId { get; set; }
 
         // List for selecting techniques
-        public IEnumerable<SelectListItem> FishingTechniques { get; set; } = new List<SelectListItem>();
+        public List<FishingTechnique> FishingTechniques { get; set; } = new List<FishingTechnique>();
     }
 }

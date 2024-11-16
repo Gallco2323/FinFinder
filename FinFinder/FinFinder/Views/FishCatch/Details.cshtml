@@ -15,6 +15,11 @@
 
 <hr />
 
+@if (User?.Identity?.Name == @Model.PublisherName)
+{
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+}
+
 <!-- Publisher Information -->
 <h3>Publisher</h3>
 <div class="media">

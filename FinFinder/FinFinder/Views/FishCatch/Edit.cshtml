@@ -1,0 +1,71 @@
+﻿@using FinFinder.Web.ViewModels.FishCatch
+@model FishCatchEditViewModel
+
+@{
+    ViewData["Title"] = "Edit Fish Catch";
+}
+
+<h2>Edit Fish Catch</h2>
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Species" class="control-label"></label>
+        <input asp-for="Species" class="form-control" />
+        <span asp-validation-for="Species" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Weight" class="control-label"></label>
+        <input asp-for="Weight" class="form-control" />
+        <span asp-validation-for="Weight" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Length" class="control-label"></label>
+        <input asp-for="Length" class="form-control" />
+        <span asp-validation-for="Length" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Location" class="control-label"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.FishingTechniqueId" class="form-label-add-edit">Select Fishing Technique</label>
+        <select asp-for="@Model.FishingTechniqueId" class="form-control" aria-required="true" asp-items="@(new SelectList(Model.FishingTechniques, "Id", "Name"))">
+            <option value="">Select Fishing Technique...</option>
+        </select>
+        <span asp-validation-for="@Model.FishingTechniqueId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Photo" class="control-label">Upload New Photo (optional)</label>
+        <input asp-for="Photo" class="form-control-file" type="file" asp-optional="true" />
+        <span asp-validation-for="Photo" class="text-danger"></span>
+
+        @if (Model.PhotoUrl != null)
+        {
+            <p>Current Photo:</p>
+            <img src="@Model.PhotoUrl" alt="Current Photo" class="img-thumbnail" style="max-width: 200px;" />
+        }
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

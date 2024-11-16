@@ -1,0 +1,28 @@
+﻿@using FinFinder.Web.ViewModels.FishCatch
+@model IEnumerable<FishCatchIndexViewModel>
+
+@{
+    ViewData["Title"] = "All Fish Catches";
+}
+
+<h2>All Fish Catches</h2>
+
+<div class="row">
+    @foreach (var fishCatch in Model)
+    {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                <img src="@fishCatch.PhotoURL" class="card-img-top" alt="@fishCatch.Species" style="max-height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                    <h5 class="card-title">@fishCatch.Species</h5>
+                    <p class="card-text">
+                        <strong>Location:</strong> @fishCatch.Location<br />
+                        <strong>Date Caught:</strong> @fishCatch.DateCaught.ToString("MMMM dd, yyyy")<br />
+                        <strong>Posted by:</strong> @fishCatch.PublisherName
+                    </p>
+                    <a asp-action="Details" asp-route-id="@fishCatch.Id" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        }
+</div>
