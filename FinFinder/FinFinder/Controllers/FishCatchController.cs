@@ -85,12 +85,16 @@ namespace FinFinder.Web.Controllers
                 Description = model.Description,
                 Weight = model.Weight,
                 Length = model.Length,
-               
+                
                 Location = model.Location,
                 FishingTechniqueId = model.FishingTechniqueId,
                 PhotoURL = photoUrl,
                 DateCaught = DateTime.Now// This will store the current date and time
             };
+           var user = _context.Users.FirstOrDefault(u => u.Id == fishCatch.UserId);
+            user.FishCount++;
+            int fishcount = user.FishCount;
+
 
             _context.Add(fishCatch);
             await _context.SaveChangesAsync();

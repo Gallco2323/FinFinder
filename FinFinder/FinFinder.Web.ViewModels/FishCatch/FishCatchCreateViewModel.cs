@@ -20,6 +20,8 @@ namespace FinFinder.Web.ViewModels.FishCatch
 
         public IFormFile Photo { get; set; }
 
+       
+
         [Required]
         [Range(MinWeight, MaxWeight)]
 
