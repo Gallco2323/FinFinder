@@ -1,0 +1,38 @@
+﻿@using FinFinder.Web.ViewModels.FishCatch;
+@model IEnumerable<FishCatchFavoriteViewModel>
+
+@{
+    ViewData["Title"] = "My Favorites";
+}
+
+<h2>My Favorites</h2>
+
+<div class="row">
+    @foreach (var favorite in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="@favorite.PhotoURL" class="card-img-top" alt="@favorite.Species" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">@favorite.Species</h5>
+                    <p class="card-text">
+                        <strong>Location:</strong> @favorite.Location<br />
+                        <strong>Date Caught:</strong> @favorite.DateCaught.ToString("MMMM dd, yyyy")<br />
+                        <strong>Posted by:</strong> @favorite.PublisherName
+                    </p>
+
+                    <div class="d-flex justify-content-between mt-auto">
+                    
+                    <a asp-controller="FishCatch" asp-action="Details" asp-route-id="@favorite.FishCatchId" class="btn btn-primary">View Details</a>
+
+                    <!-- Remove button for removing from favorites -->
+                    <form asp-action="Remove" method="post" asp-route-id="@favorite.FishCatchId" class="m-0">
+                        <button type="submit" class="btn btn-danger ">Remove</button>
+                    </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

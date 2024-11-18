@@ -1,19 +1,24 @@
-﻿using FinFinder.Data.Models;
+﻿using FinFinder.Data;
+using FinFinder.Data.Models;
+using FinFinder.Web.ViewModels.FishCatch;
 using FinFinder.Web.ViewModels.Profile;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinFinder.Web.Controllers
 {
     [Authorize]
     public class ProfileController : Controller
     {
+        private readonly FinFinderDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public ProfileController(UserManager<ApplicationUser> userManager)
+        public ProfileController(UserManager<ApplicationUser> userManager, FinFinderDbContext _context)
         {
             _userManager = userManager;
+            this._context = _context;
         }
 
         // GET: Profile/Edit
@@ -83,6 +88,40 @@ namespace FinFinder.Web.Controllers
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var user = await _userManager.Users
+                .Include(u => u.FishCatches)
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var model = new UserProfileViewModel
+            {
+                UserName = user.UserName ?? string.Empty,
+                ProfilePictureURL = user.ProfilePictureURL ?? "/images/default-profile.png",
+                Bio = user.Bio,
+                FishCount = user.FishCount,
+                FishCatches = user.FishCatches.Select(fc => new FishCatchIndexViewModel
+                {
+                    Id = fc.Id,
+                    Species = fc.Species,
+                    Location = fc.Location,
+                    PublisherName = user.UserName ?? string.Empty,
+                    PublisherId = user.Id.ToString(),
+
+                    DateCaught = fc.DateCaught,
+                    PhotoURL = fc.PhotoURL ?? "/images/default-fish.jpg"
+                }).ToList()
+            };
+
+            return View(model);
         }
     }
 }

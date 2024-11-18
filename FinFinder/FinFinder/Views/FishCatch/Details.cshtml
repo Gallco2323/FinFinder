@@ -15,10 +15,22 @@
 
 <hr />
 
+@{
+    var name = User?.Identity?.Name;
+    var owner = Model.PublisherName;
+}
+
 @if (User?.Identity?.Name == @Model.PublisherName)
 {
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
 }
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-action="AddToFavorites" method="post" asp-route-id="@Model.Id">
+        <button type="submit" class="btn btn-warning mt-3">Add to Favorites</button>
+    </form>
+}
+
 
 <!-- Publisher Information -->
 <h3>Publisher</h3>

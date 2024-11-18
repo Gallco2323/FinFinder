@@ -21,7 +21,8 @@ namespace FinFinder
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             {
-
+                options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedAccount = false;
             })
             .AddRoles<IdentityRole<Guid>>()
             .AddEntityFrameworkStores<FinFinderDbContext>();

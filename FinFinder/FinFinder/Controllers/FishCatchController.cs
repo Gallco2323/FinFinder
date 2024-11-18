@@ -1,6 +1,7 @@
 ﻿using FinFinder.Data;
 using FinFinder.Data.Models;
 using FinFinder.Web.ViewModels.FishCatch;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -207,6 +208,29 @@ namespace FinFinder.Web.Controllers
                 PublisherProfilePictureURL = fishCatch.User.ProfilePictureURL
             };
             return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> AddToFavorites(Guid id)
+        {
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var existingFavorite = await _context.Favorites
+                .FirstOrDefaultAsync(f => f.UserId == userId && f.FishCatchId == id);
+
+            if (existingFavorite == null)
+            {
+                var favorite = new Favorite
+                {
+                    UserId = userId,
+                    FishCatchId = id
+                };
+
+                _context.Favorites.Add(favorite);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Details", new { id = id });
         }
 
     }
