@@ -13,29 +13,52 @@
             <h2 class="mt-3">@Model.UserName</h2>
             <p>@Model.Bio</p>
             <p><strong>Fish Catches:</strong> @Model.FishCount</p>
+            @if (User?.Identity?.Name == @Model.UserName)
+            {
+                <div class="d-flex justify-content-end mb-3">
+                    <a asp-action="HiddenPosts" asp-route-id="@Model.UserId" class="btn btn-warning">View Hidden Posts</a>
+                </div>
+            }
         </div>
+        
+
 
         <!-- User's Fish Catches -->
         <div class="col-md-8">
             <h3>@Model.UserName's Fish Catches</h3>
-            <div class="row">
-                @foreach (var fishCatch in Model.FishCatches)
+
+            @if (Model.FishCatches != null && Model.FishCatches.Any())
+            {
+                <div class="row">
+                    @foreach (var fishCatch in Model.FishCatches)
                     {
                         <div class="col-md-6 mb-4">
-                            <div class="card">
-                            <img src="@fishCatch.PhotoURL" class="card-img-top" alt="@fishCatch.Species" style="height: 200px; object-fit: cover;">
+                            <div class="card shadow-sm">
+                                @if (fishCatch.PhotoURLs != null && fishCatch.PhotoURLs.Any())
+                                {
+                                    <img src="@fishCatch.PhotoURLs.First()" class="card-img-top" alt="@fishCatch.Species" style="height: 200px; object-fit: cover;">
+                                }
+                                else
+                                {
+                                    <img src="/images/default-fish.jpg" class="card-img-top" alt="Default Fish" style="height: 200px; object-fit: cover;">
+                                }
                                 <div class="card-body">
-                                <h5 class="card-title">@fishCatch.Species</h5>
-                                <p class="card-text">
-                                    <strong>Location:</strong> @fishCatch.Location<br />
-                                    <strong>Date Caught:</strong> @fishCatch.DateCaught.ToString("MMMM dd, yyyy")
-                                </p>
-                                <a asp-controller="FishCatch" asp-action="Details" asp-route-id="@fishCatch.Id" class="btn btn-primary">View Details</a>
+                                    <h5 class="card-title">@fishCatch.Species</h5>
+                                    <p class="card-text">
+                                        <strong>Location:</strong> @fishCatch.LocationName<br />
+                                        <strong>Date Caught:</strong> @fishCatch.DateCaught.ToString("MMMM dd, yyyy")
+                                    </p>
+                                    <a asp-controller="FishCatch" asp-action="Details" asp-route-id="@fishCatch.Id" class="btn btn-primary">View Details</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     }
-            </div>
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">No fish catches found.</p>
+            }
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,19 +11,34 @@ namespace FinFinder.Web.ViewModels.FishCatch
     {
         public Guid Id { get; set; }
 
-        public required string Species { get; set; }
-        public required string Description { get; set; }
+        [Required]
+        public string Species { get; set; }
+
+        [Required]
+        public string Description { get; set; }
+
         public double Weight { get; set; }
         public double Length { get; set; }
-        
-        public required string Location { get; set; }
-        public required string FishingTechniqueName { get; set; }
-        public string? PhotoURL { get; set; }
+
+        // Updated Location
+        [Required]
+        public string LocationName { get; set; } // Display-friendly name
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+
+        [Required]
+        public string FishingTechniqueName { get; set; }
+
+        // Support for multiple photos
+        public List<string> Photos { get; set; } = new List<string>();
+
         public DateTime DateCaught { get; set; }
 
-        public required string PublisherName { get; set; }
-        
+        // Publisher Info
+        [Required]
+        public string PublisherName { get; set; }
         public string? PublisherProfilePictureURL { get; set; }
     }
+
 
 }

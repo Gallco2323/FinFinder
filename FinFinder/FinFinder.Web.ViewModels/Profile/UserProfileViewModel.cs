@@ -9,6 +9,7 @@ namespace FinFinder.Web.ViewModels.Profile
 {
     public class UserProfileViewModel
     {
+        public Guid UserId { get; set; }
         public required string UserName { get; set; }
         public string? ProfilePictureURL { get; set; }
         public string? Bio { get; set; }

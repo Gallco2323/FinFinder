@@ -24,7 +24,9 @@ namespace FinFinder.Data.Models
         [Required]
         [MinLength(LocationMinLength)]
         [MaxLength(LocationMaxLength)]
-        public string Location { get; set; } = null!;
+        public string LocationName { get; set; } = null!;
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
 
 
         [Required]
@@ -32,10 +34,12 @@ namespace FinFinder.Data.Models
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!; 
 
-        public string? PhotoURL { get; set; }
+      
 
         [Required] 
-        public DateTime DateCaught { get; set; } 
+        public DateTime DateCaught { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
 
         [Required]
         [Range(MinWeight, MaxWeight)]
@@ -45,6 +49,8 @@ namespace FinFinder.Data.Models
         [Range(MinLength, MaxLength)]
 
         public double Length { get; set; }
+
+
 
 
 
@@ -61,15 +67,16 @@ namespace FinFinder.Data.Models
         [ForeignKey(nameof(UserId))]
         public ApplicationUser User { get; set; } = null!;
 
-        [Required]
-        public Observation? Observation { get; set; } 
+        
 
         [ForeignKey((nameof(FishingTechniqueId)))]
         public FishingTechnique FishingTechnique { get; set; } = null!;
 
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
         public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
-        
-        
+        public ICollection<Like> Likes { get; set; } = new List<Like>();
+        public ICollection<Photo> Photos { get; set; } = new List<Photo>();
+
+
     }
 }

@@ -1,7 +1,9 @@
 ﻿using FinFinder.Data;
 using FinFinder.Data.Models;
 using FinFinder.Web.ViewModels.FishCatch;
+using FinFinder.Web.ViewModels.Profile;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,185 +15,209 @@ namespace FinFinder.Web.Controllers
     using static Common.EntityValidationConstants.FishCatch;
     public class FishCatchController : Controller
     {
-
         private readonly FinFinderDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public FishCatchController(FinFinderDbContext context)
+        public FishCatchController(FinFinderDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
-        [HttpGet]
+
+        // INDEX
         public async Task<IActionResult> Index()
         {
             var fishCatches = await _context.FishCatches
+                .Where(fc => !fc.IsDeleted)
                 .AsNoTracking()
-                .Include(f => f.User) // Include the publisher details
+                .Include(f => f.User)
+                .Include(f => f.Photos)
                 .ToListAsync();
 
             var model = fishCatches.Select(f => new FishCatchIndexViewModel
             {
                 Id = f.Id,
                 Species = f.Species,
-                Location = f.Location,
+                LocationName = f.LocationName,
+                Latitude = f.Latitude,
+                Longitude = f.Longitude,
                 DateCaught = f.DateCaught,
-                PhotoURL = f.PhotoURL ?? "/images/default-fish.jpg", // Default image if PhotoURL is null
+                PhotoURLs = f.Photos.Select(p => p.Url).ToList(),
                 PublisherName = f.User.UserName,
                 PublisherId = f.UserId.ToString()
             }).ToList();
 
             return View(model);
         }
+
+        // CREATE GET
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var model = new FishCatchCreateViewModel();
-            model.FishingTechniques =  await this._context.FishingTechniques.ToListAsync();
-            
+            var model = new FishCatchCreateViewModel
+            {
+                FishingTechniques = await _context.FishingTechniques.ToListAsync()
+            };
+
             return View(model);
         }
 
+        // CREATE POST
         [HttpPost]
         public async Task<IActionResult> Create(FishCatchCreateViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                model.FishingTechniques = this._context.FishingTechniques.ToList();
+                model.FishingTechniques = await _context.FishingTechniques.ToListAsync();
                 return View(model);
             }
-            string photoUrl = null;
-            if (model.Photo != null)
-            {
-                // Define the path to save the uploaded file
-                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-                var uniqueFileName = $"{Guid.NewGuid()}_{model.Photo.FileName}";
-                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                // Save the file to the specified path
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await model.Photo.CopyToAsync(fileStream);
-                }
-
-                // Set the photoUrl to save in the database
-                photoUrl = $"/images/{uniqueFileName}";
-            }
-
-            // Create a new FishCatch entity with the uploaded photo URL
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var fishCatch = new FishCatch
             {
                 Id = Guid.NewGuid(),
-                UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)), // Convert UserId to Guid
+                UserId = userId,
                 Species = model.Species,
                 Description = model.Description,
                 Weight = model.Weight,
                 Length = model.Length,
-                
-                Location = model.Location,
+                Latitude = model.Latitude,
+                Longitude = model.Longitude,
+                LocationName = model.LocationName,
                 FishingTechniqueId = model.FishingTechniqueId,
-                PhotoURL = photoUrl,
-                DateCaught = DateTime.Now// This will store the current date and time
+                DateCaught = DateTime.UtcNow
             };
-           var user = _context.Users.FirstOrDefault(u => u.Id == fishCatch.UserId);
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
             user.FishCount++;
-            int fishcount = user.FishCount;
 
-
-            _context.Add(fishCatch);
+            _context.FishCatches.Add(fishCatch);
             await _context.SaveChangesAsync();
+
+            // Handle photo uploads
+            if (model.PhotoFiles != null && model.PhotoFiles.Any())
+            {
+                var photos = new List<Photo>();
+                foreach (var file in model.PhotoFiles)
+                {
+                    var fileName = $"{Guid.NewGuid()}_{file.FileName}";
+                    var filePath = Path.Combine("wwwroot/images", fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    photos.Add(new Photo
+                    {
+                        Url = $"/images/{fileName}",
+                        FishCatchId = fishCatch.Id
+                    });
+                }
+
+                _context.Photos.AddRange(photos);
+                await _context.SaveChangesAsync();
+            }
+
             return RedirectToAction(nameof(Index));
-
-
-
         }
 
+        // EDIT GET
         [HttpGet]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null) return NotFound();
 
-            var fishCatch = await _context.FishCatches.FindAsync(id);
+            var fishCatch = await _context.FishCatches
+                .Include(fc => fc.Photos)
+                .FirstOrDefaultAsync(fc => fc.Id == id);
+
             if (fishCatch == null || fishCatch.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
                 return Unauthorized();
 
-            var model = new FishCatchEditViewModel()
+            var model = new FishCatchEditViewModel
             {
                 Id = fishCatch.Id,
                 Species = fishCatch.Species,
                 Description = fishCatch.Description,
                 Weight = fishCatch.Weight,
                 Length = fishCatch.Length,
-                Location = fishCatch.Location,
+                Latitude = fishCatch.Latitude,
+                Longitude = fishCatch.Longitude,
+                LocationName = fishCatch.LocationName,
                 FishingTechniqueId = fishCatch.FishingTechniqueId,
-                PhotoUrl = fishCatch.PhotoURL,
-                FishingTechniques = this._context.FishingTechniques.ToList()
+                ExistingPhotoURLs = fishCatch.Photos.Select(p => p.Url).ToList(),
+                FishingTechniques = await _context.FishingTechniques.ToListAsync()
             };
 
-            
-            
             return View(model);
         }
 
+        // EDIT POST
         [HttpPost]
         public async Task<IActionResult> Edit(Guid id, FishCatchEditViewModel model)
         {
-            if (id != model.Id)
-            {
-                return NotFound();
-            }
+            if (id != model.Id) return NotFound();
 
-            ModelState.Remove("Photo");
             if (!ModelState.IsValid)
             {
-                model.FishingTechniques =await  _context.FishingTechniques.ToListAsync();
+                model.FishingTechniques = await _context.FishingTechniques.ToListAsync();
                 return View(model);
             }
-                var fishCatch = await _context.FishCatches.FindAsync(id);
-                if (fishCatch == null || fishCatch.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
-                {
-                    return Unauthorized();
-                }
-
-                fishCatch.Species = model.Species;
-                fishCatch.Description = model.Description;
-                fishCatch.Weight = model.Weight;
-                fishCatch.Length = model.Length;
-                fishCatch.Location = model.Location;
-                fishCatch.FishingTechniqueId = model.FishingTechniqueId;
-
-                // Check if a new photo was uploaded
-                if (model.Photo != null)
-                {
-                    // Save the new photo
-                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-                    var uniqueFileName = $"{Guid.NewGuid()}_{model.Photo.FileName}";
-                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await model.Photo.CopyToAsync(fileStream);
-                    }
-
-                    // Set the new photo URL
-                    fishCatch.PhotoURL = $"/images/{uniqueFileName}";
-                }
-
-                _context.Update(fishCatch);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-
-
-
-            [HttpGet]
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null) return NotFound();
 
             var fishCatch = await _context.FishCatches
-                                           .Include(f => f.FishingTechnique)
-                                           .Include(f => f.User) // Join with ApplicationUser
-                                           .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(fc => fc.Photos)
+                .FirstOrDefaultAsync(fc => fc.Id == id);
 
-            if (fishCatch == null) return NotFound();
+            if (fishCatch == null || fishCatch.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                return Unauthorized();
+
+            fishCatch.Species = model.Species;
+            fishCatch.Description = model.Description;
+            fishCatch.Weight = model.Weight;
+            fishCatch.Length = model.Length;
+            fishCatch.Latitude = model.Latitude;
+            fishCatch.Longitude = model.Longitude;
+            fishCatch.LocationName = model.LocationName;
+            fishCatch.FishingTechniqueId = model.FishingTechniqueId;
+
+            // Handle new photo uploads
+            if (model.NewPhotoFiles != null && model.NewPhotoFiles.Any())
+            {
+                foreach (var file in model.NewPhotoFiles)
+                {
+                    var fileName = $"{Guid.NewGuid()}_{file.FileName}";
+                    var filePath = Path.Combine("wwwroot/images", fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    var photo = new Photo
+                    {
+                        Url = $"/images/{fileName}",
+                        FishCatchId = fishCatch.Id
+                    };
+                    _context.Photos.Add(photo);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // DETAILS
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var fishCatch = await _context.FishCatches
+                .Include(fc => fc.Photos)
+                .Include(fc => fc.User)
+                .FirstOrDefaultAsync(fc => fc.Id == id);
+
+            if (fishCatch == null || fishCatch.IsDeleted)
+                return NotFound();
 
             var model = new FishCatchDetailsViewModel
             {
@@ -200,25 +226,25 @@ namespace FinFinder.Web.Controllers
                 Description = fishCatch.Description,
                 Weight = fishCatch.Weight,
                 Length = fishCatch.Length,
-               
-                Location = fishCatch.Location,
-                FishingTechniqueName = fishCatch.FishingTechnique.Name,
-                PhotoURL = fishCatch.PhotoURL,
+                Latitude = fishCatch.Latitude,
+                Longitude = fishCatch.Longitude,
+                LocationName = fishCatch.LocationName,
                 DateCaught = fishCatch.DateCaught,
-
-                // Publisher details
+                FishingTechniqueName = _context.FishingTechniques.FirstOrDefault(ft=>ft.Id == fishCatch.FishingTechniqueId).Name,
+                Photos = fishCatch.Photos.Select(p => p.Url).ToList(),
                 PublisherName = fishCatch.User.UserName,
-                
                 PublisherProfilePictureURL = fishCatch.User.ProfilePictureURL
             };
+
             return View(model);
         }
 
-        [Authorize]
+        // ADD TO FAVORITES
         [HttpPost]
         public async Task<IActionResult> AddToFavorites(Guid id)
         {
             var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
             var existingFavorite = await _context.Favorites
                 .FirstOrDefaultAsync(f => f.UserId == userId && f.FishCatchId == id);
 
@@ -229,13 +255,66 @@ namespace FinFinder.Web.Controllers
                     UserId = userId,
                     FishCatchId = id
                 };
-
                 _context.Favorites.Add(favorite);
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToAction("Details", new { id = id });
+            return RedirectToAction("Details", new { id });
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> SoftDelete(Guid id)
+        {
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            var fishCatch = await _context.FishCatches
+                .FirstOrDefaultAsync(fc => fc.Id == id && fc.UserId == userId);
+
+            if (fishCatch == null)
+            {
+                return Unauthorized();
+            }
+
+            fishCatch.IsDeleted = true; // Perform soft delete
+            _context.Update(fishCatch);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> PermanentDelete(Guid id)
+        {
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            var fishCatch = await _context.FishCatches
+                .Include(fc => fc.Photos)
+                .FirstOrDefaultAsync(fc => fc.Id == id && fc.UserId == userId);
+
+            if (fishCatch == null)
+            {
+                return Unauthorized();
+            }
+
+            // Delete associated photos
+            if (fishCatch.Photos.Any())
+            {
+                var photoPaths = fishCatch.Photos.Select(p => Path.Combine("wwwroot", p.Url.TrimStart('/')));
+                foreach (var path in photoPaths)
+                {
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                }
+                _context.Photos.RemoveRange(fishCatch.Photos);
+            }
+
+            _context.FishCatches.Remove(fishCatch); // Permanent delete
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

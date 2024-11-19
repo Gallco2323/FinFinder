@@ -1,0 +1,43 @@
+﻿@using FinFinder.Web.ViewModels.FishCatch
+@model IEnumerable<FishCatchHiddenViewModel>
+
+@{
+    ViewData["Title"] = "Hidden Posts";
+}
+
+<h2>Hidden Posts</h2>
+
+<div class="row">
+    @if (!Model.Any())
+    {
+        <p class="text-muted">No hidden posts found.</p>
+    }
+    else
+    {
+        @foreach (var post in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    @if (post.PhotoURLs.Any())
+                    {
+                        <img src="@post.PhotoURLs.First()" class="card-img-top" alt="@post.Species" style="height: 200px; object-fit: cover;">
+                    }
+                    else
+                    {
+                        <img src="/images/default-fish.jpg" class="card-img-top" alt="Default Fish" style="height: 200px; object-fit: cover;">
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@post.Species</h5>
+                        <p class="card-text">
+                            <strong>Location:</strong> @post.LocationName<br />
+                            <strong>Date Caught:</strong> @post.DateCaught.ToString("MMMM dd, yyyy")
+                        </p>
+                        <form asp-action="Unhide" method="post" asp-route-id="@post.Id" class="d-inline">
+                            <button type="submit" class="btn btn-success">Unhide</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

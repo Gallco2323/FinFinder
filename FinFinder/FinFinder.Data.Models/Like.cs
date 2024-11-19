@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,25 +8,26 @@ using System.Threading.Tasks;
 
 namespace FinFinder.Data.Models
 {
-    using static Common.EntityValidationConstants.Observation;
-    public class Observation
+    public class Like
     {
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
 
+        // Foreign Key for User
         [Required]
-        [MinLength(BaitMinLength)]
-        [MaxLength(BaitMaxLength)]
-        public string Bait { get; set; } = null!;
+        public Guid UserId { get; set; }
 
-        
-        [MaxLength(NotesMaxLength)]
-        [MinLength(NotesMinLength)]
-        public string? Notes { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public ApplicationUser User { get; set; } = null!;
+
+        // Foreign Key for FishCatch
         [Required]
         public Guid FishCatchId { get; set; }
 
         [ForeignKey(nameof(FishCatchId))]
         public FishCatch FishCatch { get; set; } = null!;
+
+        // Optional timestamp for when the like was created
+        public DateTime LikedOn { get; set; } = DateTime.UtcNow;
     }
 }

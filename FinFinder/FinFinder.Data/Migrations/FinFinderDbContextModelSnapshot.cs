@@ -159,16 +159,22 @@ namespace FinFinder.Data.Migrations
                     b.Property<Guid>("FishingTechniqueId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("float");
+
                     b.Property<double>("Length")
                         .HasColumnType("float");
 
-                    b.Property<string>("Location")
+                    b.Property<string>("LocationName")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<string>("PhotoURL")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
 
                     b.Property<string>("Species")
                         .IsRequired()
@@ -208,55 +214,68 @@ namespace FinFinder.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("85939209-8576-4811-bf8c-79a2f888a284"),
+                            Id = new Guid("107799da-1d49-4f8b-b584-f4a5c6c9bd10"),
                             Name = "Fly Fishing"
                         },
                         new
                         {
-                            Id = new Guid("748dfa61-51d2-4064-b6a4-35aace504cef"),
+                            Id = new Guid("3e526001-81fe-4a9a-87b7-7fdb3df52fd5"),
                             Name = "Spin Fishing"
                         },
                         new
                         {
-                            Id = new Guid("b1e006fa-9d41-4375-a895-652b59f1abf5"),
+                            Id = new Guid("0aacc3fb-59c4-414b-a46f-d1e23ef639f2"),
                             Name = "Bait Fishing"
                         },
                         new
                         {
-                            Id = new Guid("a41c63a4-14ab-4321-a994-e6f4eefeb9bc"),
+                            Id = new Guid("7f2074b5-5169-4ad7-bbad-e7e722306535"),
                             Name = "Trolling"
                         });
                 });
 
-            modelBuilder.Entity("FinFinder.Data.Models.Observation", b =>
+            modelBuilder.Entity("FinFinder.Data.Models.Like", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ApplicationUserId")
+                    b.Property<Guid>("FishCatchId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Bait")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<DateTime>("LikedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FishCatchId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
+                });
+
+            modelBuilder.Entity("FinFinder.Data.Models.Photo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("FishCatchId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Notes")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("FishCatchId");
 
-                    b.HasIndex("FishCatchId")
-                        .IsUnique();
-
-                    b.ToTable("Observations");
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -451,15 +470,30 @@ namespace FinFinder.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FinFinder.Data.Models.Observation", b =>
+            modelBuilder.Entity("FinFinder.Data.Models.Like", b =>
                 {
-                    b.HasOne("FinFinder.Data.Models.ApplicationUser", null)
-                        .WithMany("Observations")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("FinFinder.Data.Models.FishCatch", "FishCatch")
-                        .WithOne("Observation")
-                        .HasForeignKey("FinFinder.Data.Models.Observation", "FishCatchId")
+                        .WithMany("Likes")
+                        .HasForeignKey("FishCatchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinFinder.Data.Models.ApplicationUser", "User")
+                        .WithMany("Likes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FishCatch");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FinFinder.Data.Models.Photo", b =>
+                {
+                    b.HasOne("FinFinder.Data.Models.FishCatch", "FishCatch")
+                        .WithMany("Photos")
+                        .HasForeignKey("FishCatchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -525,7 +559,7 @@ namespace FinFinder.Data.Migrations
 
                     b.Navigation("FishCatches");
 
-                    b.Navigation("Observations");
+                    b.Navigation("Likes");
                 });
 
             modelBuilder.Entity("FinFinder.Data.Models.FishCatch", b =>
@@ -534,8 +568,9 @@ namespace FinFinder.Data.Migrations
 
                     b.Navigation("Favorites");
 
-                    b.Navigation("Observation")
-                        .IsRequired();
+                    b.Navigation("Likes");
+
+                    b.Navigation("Photos");
                 });
 
             modelBuilder.Entity("FinFinder.Data.Models.FishingTechnique", b =>

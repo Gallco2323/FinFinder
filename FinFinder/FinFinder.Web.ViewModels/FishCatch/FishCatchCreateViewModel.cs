@@ -10,37 +10,40 @@ namespace FinFinder.Web.ViewModels.FishCatch
         [Required]
         [MinLength(SpeciesMinLength)]
         [MaxLength(SpeciesMaxLength)]
-
-        public  string Species { get; set; }
+        public string Species { get; set; }
 
         [Required]
         [MinLength(DescriptionMinLength)]
         [MaxLength(DescriptionMaxLength)]
-        public  string Description { get; set; }
-
-        public IFormFile Photo { get; set; }
-
-       
+        public string Description { get; set; }
 
         [Required]
         [Range(MinWeight, MaxWeight)]
-
         public double Weight { get; set; }
 
         [Required]
         [Range(MinLength, MaxLength)]
         public double Length { get; set; }
 
+        // Location
         [Required]
         [MinLength(LocationMinLength)]
         [MaxLength(LocationMaxLength)]
+        public string LocationName { get; set; } // Human-readable name
 
-        public  string Location { get; set; }
+        [Required]
+        public double Latitude { get; set; } // Geolocation Latitude
+        [Required]
+        public double Longitude { get; set; } // Geolocation Longitude
 
         [Required]
         public Guid FishingTechniqueId { get; set; }
 
         // List for selecting techniques
-        public List<FishingTechnique> FishingTechniques { get; set; }  = new List<FishingTechnique>();
+        public List<FishingTechnique> FishingTechniques { get; set; } = new List<FishingTechnique>();
+
+        // Updated for photo upload
+        public List<IFormFile> PhotoFiles { get; set; } = new List<IFormFile>();
     }
+
 }

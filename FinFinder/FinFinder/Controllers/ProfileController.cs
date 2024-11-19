@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace FinFinder.Web.Controllers
 {
@@ -95,6 +96,7 @@ namespace FinFinder.Web.Controllers
         {
             var user = await _userManager.Users
                 .Include(u => u.FishCatches)
+                .ThenInclude(fc => fc.Photos) // Ensure Photos are included
                 .FirstOrDefaultAsync(u => u.Id == id);
 
             if (user == null)
@@ -107,21 +109,50 @@ namespace FinFinder.Web.Controllers
                 UserName = user.UserName ?? string.Empty,
                 ProfilePictureURL = user.ProfilePictureURL ?? "/images/default-profile.png",
                 Bio = user.Bio,
+                UserId = user.Id,
                 FishCount = user.FishCount,
-                FishCatches = user.FishCatches.Select(fc => new FishCatchIndexViewModel
-                {
-                    Id = fc.Id,
-                    Species = fc.Species,
-                    Location = fc.Location,
-                    PublisherName = user.UserName ?? string.Empty,
-                    PublisherId = user.Id.ToString(),
-
-                    DateCaught = fc.DateCaught,
-                    PhotoURL = fc.PhotoURL ?? "/images/default-fish.jpg"
-                }).ToList()
+                FishCatches = user.FishCatches
+                    .Where(f => !f.IsDeleted) // Exclude soft-deleted catches
+                    .Select(fc => new FishCatchIndexViewModel
+                    {
+                        Id = fc.Id,
+                        Species = fc.Species,
+                        LocationName = fc.LocationName, // Use display-friendly location name
+                        DateCaught = fc.DateCaught,
+                        PhotoURLs = fc.Photos.Select(p => p.Url).ToList(), // Populate PhotoURLs
+                        PublisherName = user.UserName ?? string.Empty
+                    }).ToList()
             };
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> HiddenPosts(Guid id)
+        {
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            if (userId != id)
+            {
+                return Unauthorized();
+            }
+
+            var hiddenPosts = await _context.FishCatches
+                .Where(fc => fc.IsDeleted && fc.UserId == userId) // Filter hidden posts for the user
+                .Include(fc => fc.Photos)
+                .ToListAsync();
+
+            var model = hiddenPosts.Select(fc => new FishCatchHiddenViewModel
+            {
+                Id = fc.Id,
+                Species = fc.Species,
+                LocationName = fc.LocationName,
+                DateCaught = fc.DateCaught,
+                PhotoURLs = fc.Photos.Select(p => p.Url).ToList()
+            }).ToList();
+
+            return View(model);
+        }
+
     }
 }

@@ -17,7 +17,8 @@ namespace FinFinder.Data
        
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
-        public DbSet<Observation> Observations { get; set; }
+        public DbSet<Like> Likes { get; set; }
+        public DbSet<Photo> Photos { get; set; }
         public DbSet<FishingTechnique> FishingTechniques { get; set; }
      
 
