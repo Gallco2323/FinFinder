@@ -23,6 +23,11 @@ namespace FinFinder
             {
                 options.User.RequireUniqueEmail = true;
                 options.SignIn.RequireConfirmedAccount = false;
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 6;
             })
             .AddRoles<IdentityRole<Guid>>()
             .AddEntityFrameworkStores<FinFinderDbContext>();

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "X41ZvtGTirjG6j2U2B7r5IfyL3sIB/5RHORvsFU7MYc=",
+  "Hash": "RBpJPMCQEL6cidNrwKY7RnNZBrOMH4MG8UZTFTDeT5o=",
   "Source": "FinFinder.Web",
   "BasePath": "_content/FinFinder.Web",
   "Mode": "Default",
@@ -1271,6 +1271,25 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\378328d2-b0ff-4a77-8e9c-dbe495f3eccb_trout.webp",
+      "SourceId": "FinFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\",
+      "BasePath": "_content/FinFinder.Web",
+      "RelativePath": "images/378328d2-b0ff-4a77-8e9c-dbe495f3eccb_trout.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\378328d2-b0ff-4a77-8e9c-dbe495f3eccb_trout.webp"
+    },
+    {
       "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\4efe1c8e-e635-46ae-9543-cf8d7a91d1b4_Screenshot 2024-11-14 090051.png",
       "SourceId": "FinFinder.Web",
       "SourceType": "Discovered",
@@ -1288,6 +1307,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\4efe1c8e-e635-46ae-9543-cf8d7a91d1b4_Screenshot 2024-11-14 090051.png"
+    },
+    {
+      "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\5929a20d-7773-4a99-b940-4d481c841080_b55im3-scaled-1.jpg",
+      "SourceId": "FinFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\",
+      "BasePath": "_content/FinFinder.Web",
+      "RelativePath": "images/5929a20d-7773-4a99-b940-4d481c841080_b55im3-scaled-1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\5929a20d-7773-4a99-b940-4d481c841080_b55im3-scaled-1.jpg"
     },
     {
       "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\5952d73d-f64e-4864-90ea-e253be29488a_Grass carp.webp",
@@ -1611,6 +1649,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\Pike.jpg"
+    },
+    {
+      "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\profiles\\1ab16b2b-aa13-446b-bf17-1b650ff630f8_community_image_1428507998.jpg",
+      "SourceId": "FinFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\",
+      "BasePath": "_content/FinFinder.Web",
+      "RelativePath": "images/profiles/1ab16b2b-aa13-446b-bf17-1b650ff630f8_community_image_1428507998.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\profiles\\1ab16b2b-aa13-446b-bf17-1b650ff630f8_community_image_1428507998.jpg"
     },
     {
       "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\profiles\\2240cf9f-f42c-4c5a-aeef-b8f5a50754a6_ehh.webp",
