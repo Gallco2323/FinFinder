@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FinFinder.Web.ViewModels.FishCatch
 {
+    using FinFinder.Data.Models;
+    using FinFinder.Web.ViewModels.Comment;
+
     public class FishCatchDetailsViewModel
     {
         public Guid Id { get; set; }
@@ -31,6 +34,8 @@ namespace FinFinder.Web.ViewModels.FishCatch
 
         // Support for multiple photos
         public List<string> Photos { get; set; } = new List<string>();
+
+        public List<CommentViewModel> Comments { get; set; } = new List<CommentViewModel>();
 
         public DateTime DateCaught { get; set; }
 

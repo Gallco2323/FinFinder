@@ -1,5 +1,6 @@
 ﻿using FinFinder.Data;
 using FinFinder.Data.Models;
+using FinFinder.Web.ViewModels.Comment;
 using FinFinder.Web.ViewModels.FishCatch;
 using FinFinder.Web.ViewModels.Profile;
 using Microsoft.AspNetCore.Authorization;
@@ -243,8 +244,10 @@ namespace FinFinder.Web.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
             var fishCatch = await _context.FishCatches
-                .Include(fc => fc.Photos)
-                .Include(fc => fc.User)
+                .Include(fc => fc.User) // Include publisher details
+                .Include(fc => fc.Photos) // Include photos
+                .Include(fc => fc.Comments) // Include comments
+                .ThenInclude(c => c.User)
                 .FirstOrDefaultAsync(fc => fc.Id == id);
 
             if (fishCatch == null || fishCatch.IsDeleted)
@@ -265,7 +268,16 @@ namespace FinFinder.Web.Controllers
                 Photos = fishCatch.Photos.Select(p => p.Url).ToList(),
                 PublisherName = fishCatch.User.UserName,
                 PublisherProfilePictureURL = fishCatch.User.ProfilePictureURL,
-                PublisherId = fishCatch.User.Id
+                PublisherId = fishCatch.User.Id, 
+
+
+                    Comments = fishCatch.Comments.Select(c => new CommentViewModel
+                         {
+                            Id = c.Id,
+                            Content = c.Content,
+                            UserName = c.User != null ? c.User.UserName : "Unknown",
+                            DateCreated = c.DateCreated
+                         }).ToList()
             };
 
             return View(model);
