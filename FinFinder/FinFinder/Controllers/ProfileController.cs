@@ -153,6 +153,27 @@ namespace FinFinder.Web.Controllers
 
             return View(model);
         }
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Unhide(Guid id)
+        {
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            var fishCatch = await _context.FishCatches
+                .FirstOrDefaultAsync(fc => fc.Id == id && fc.UserId == userId);
+
+            if (fishCatch == null)
+            {
+                return Unauthorized();
+            }
+
+            fishCatch.IsDeleted = false; // Remove soft delete flag
+            _context.Update(fishCatch);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(HiddenPosts), new { id = userId });
+        }
+
 
     }
 }

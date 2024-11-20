@@ -15,7 +15,7 @@
             <p><strong>Fish Catches:</strong> @Model.FishCount</p>
             @if (User?.Identity?.Name == @Model.UserName)
             {
-                <div class="d-flex justify-content-end mb-3">
+                <div class="d-flex justify-content-center mb-3">
                     <a asp-action="HiddenPosts" asp-route-id="@Model.UserId" class="btn btn-warning">View Hidden Posts</a>
                 </div>
             }

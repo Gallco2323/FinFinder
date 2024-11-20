@@ -52,7 +52,9 @@ namespace FinFinder.Web.ViewModels.FishCatch
 
         // Updated for multiple photos
         public List<IFormFile> NewPhotoFiles { get; set; } = new List<IFormFile>();
-        public List<string> ExistingPhotoURLs { get; set; } = new List<string>();
+        public List<Photo> ExistingPhotos { get; set; } = new List<Photo>();
+
+        public List<Guid> PhotosToRemove { get; set; } = new List<Guid>();
     }
 
 }

@@ -146,7 +146,7 @@ namespace FinFinder.Web.Controllers
                 Longitude = fishCatch.Longitude,
                 LocationName = fishCatch.LocationName,
                 FishingTechniqueId = fishCatch.FishingTechniqueId,
-                ExistingPhotoURLs = fishCatch.Photos.Select(p => p.Url).ToList(),
+                ExistingPhotos = fishCatch.Photos.ToList(),
                 FishingTechniques = await _context.FishingTechniques.ToListAsync()
             };
 
@@ -155,13 +155,20 @@ namespace FinFinder.Web.Controllers
 
         // EDIT POST
         [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> Edit(Guid id, FishCatchEditViewModel model)
         {
-            if (id != model.Id) return NotFound();
+            if (id != model.Id)
+            {
+                return NotFound();
+            }
 
             if (!ModelState.IsValid)
             {
                 model.FishingTechniques = await _context.FishingTechniques.ToListAsync();
+                model.ExistingPhotos = await _context.Photos
+                    .Where(p => p.FishCatchId == id)
+                    .ToListAsync();
                 return View(model);
             }
 
@@ -170,8 +177,11 @@ namespace FinFinder.Web.Controllers
                 .FirstOrDefaultAsync(fc => fc.Id == id);
 
             if (fishCatch == null || fishCatch.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+            {
                 return Unauthorized();
+            }
 
+            // Update FishCatch details
             fishCatch.Species = model.Species;
             fishCatch.Description = model.Description;
             fishCatch.Weight = model.Weight;
@@ -180,6 +190,25 @@ namespace FinFinder.Web.Controllers
             fishCatch.Longitude = model.Longitude;
             fishCatch.LocationName = model.LocationName;
             fishCatch.FishingTechniqueId = model.FishingTechniqueId;
+
+            // Remove selected photos
+            if (model.PhotosToRemove != null && model.PhotosToRemove.Any())
+            {
+                var photosToDelete = fishCatch.Photos
+                    .Where(p => model.PhotosToRemove.Contains(p.Id))
+                    .ToList();
+
+                foreach (var photo in photosToDelete)
+                {
+                    var filePath = Path.Combine("wwwroot", photo.Url.TrimStart('/'));
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+
+                    _context.Photos.Remove(photo);
+                }
+            }
 
             // Handle new photo uploads
             if (model.NewPhotoFiles != null && model.NewPhotoFiles.Any())
@@ -207,6 +236,8 @@ namespace FinFinder.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+
         // DETAILS
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
@@ -233,7 +264,8 @@ namespace FinFinder.Web.Controllers
                 FishingTechniqueName = _context.FishingTechniques.FirstOrDefault(ft=>ft.Id == fishCatch.FishingTechniqueId).Name,
                 Photos = fishCatch.Photos.Select(p => p.Url).ToList(),
                 PublisherName = fishCatch.User.UserName,
-                PublisherProfilePictureURL = fishCatch.User.ProfilePictureURL
+                PublisherProfilePictureURL = fishCatch.User.ProfilePictureURL,
+                PublisherId = fishCatch.User.Id
             };
 
             return View(model);

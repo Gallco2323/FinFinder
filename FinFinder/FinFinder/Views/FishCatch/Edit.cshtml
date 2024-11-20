@@ -54,19 +54,22 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label"><strong>Current Photos</strong></label>
+            <label class="form-label"><strong>Existing Photos</strong></label>
             <div class="row">
-                @foreach (var photo in Model.ExistingPhotoURLs)
+                @foreach (var photo in Model.ExistingPhotos)
                 {
-                    <div class="col-md-3 mb-3">
-                        <img src="@photo" class="img-thumbnail" alt="Fish Catch Photo" />
+                    <div class="col-md-4 mb-3 text-center">
+                        <img src="@photo.Url" class="img-thumbnail mb-2" alt="Photo">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="PhotosToRemove" value="@photo.Id" id="photo-@photo.Id">
+                            <label class="form-check-label" for="photo-@photo.Id">Remove</label>
+                        </div>
                     </div>
                 }
             </div>
         </div>
-
         <div class="mb-3">
-            <label class="form-label">Add New Photos</label>
+            <label class="form-label"><strong>Add New Photos</strong></label>
             <input asp-for="NewPhotoFiles" type="file" class="form-control" multiple />
             <span asp-validation-for="NewPhotoFiles" class="text-danger"></span>
         </div>
