@@ -10,7 +10,9 @@ namespace FinFinder.Web.ViewModels.Comment
     {
         public Guid Id { get; set; }
         public string Content { get; set; } = string.Empty;
-        public string UserName { get; set; } = string.Empty; // Name of the user who made the comment
+        public Guid UserId { get; set; }
+        public string UserName { get; set; } = string.Empty;
+        // Name of the user who made the comment
         public DateTime DateCreated { get; set; } // When the comment was created
     }
 

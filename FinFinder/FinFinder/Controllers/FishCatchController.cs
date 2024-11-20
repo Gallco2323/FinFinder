@@ -274,6 +274,7 @@ namespace FinFinder.Web.Controllers
                     Comments = fishCatch.Comments.Select(c => new CommentViewModel
                          {
                             Id = c.Id,
+                            UserId = c.UserId,
                             Content = c.Content,
                             UserName = c.User != null ? c.User.UserName : "Unknown",
                             DateCreated = c.DateCreated
