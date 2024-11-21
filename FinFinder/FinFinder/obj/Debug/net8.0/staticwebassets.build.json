@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "C+GV1skEqTgmLele1/9dmgcwUIps/QiwAKoZm2JmN7U=",
+  "Hash": "p5KFh21mZuXM8rK0Tkk9b2kTnrJRx+WDP7thwCROEz4=",
   "Source": "FinFinder.Web",
   "BasePath": "_content/FinFinder.Web",
   "Mode": "Default",
@@ -1328,6 +1328,25 @@
       "OriginalItemSpec": "wwwroot\\images\\4efe1c8e-e635-46ae-9543-cf8d7a91d1b4_Screenshot 2024-11-14 090051.png"
     },
     {
+      "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\4f457825-809b-4d25-8960-df53102c9720_trout.webp",
+      "SourceId": "FinFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\",
+      "BasePath": "_content/FinFinder.Web",
+      "RelativePath": "images/4f457825-809b-4d25-8960-df53102c9720_trout.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\4f457825-809b-4d25-8960-df53102c9720_trout.webp"
+    },
+    {
       "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\5929a20d-7773-4a99-b940-4d481c841080_b55im3-scaled-1.jpg",
       "SourceId": "FinFinder.Web",
       "SourceType": "Discovered",
@@ -1478,6 +1497,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\9141652f-23f1-4d7e-81ac-b40eae302bd2_Capture.PNG"
+    },
+    {
+      "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\98a46240-b496-4b71-99e5-be969acdfaf8_b55im3-scaled-1.jpg",
+      "SourceId": "FinFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\",
+      "BasePath": "_content/FinFinder.Web",
+      "RelativePath": "images/98a46240-b496-4b71-99e5-be969acdfaf8_b55im3-scaled-1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\98a46240-b496-4b71-99e5-be969acdfaf8_b55im3-scaled-1.jpg"
     },
     {
       "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\a1a2a576-ad2a-467a-9d58-6a83b97696e7_WIN_20211003_21_02_16_Pro.jpg",

@@ -243,11 +243,16 @@ namespace FinFinder.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
+            var userId = User.Identity?.IsAuthenticated == true
+       ? Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))
+       : (Guid?)null;
             var fishCatch = await _context.FishCatches
                 .Include(fc => fc.User) // Include publisher details
                 .Include(fc => fc.Photos) // Include photos
                 .Include(fc => fc.Comments) // Include comments
                 .ThenInclude(c => c.User)
+                .Include(l=> l.Likes)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(fc => fc.Id == id);
 
             if (fishCatch == null || fishCatch.IsDeleted)
@@ -278,7 +283,11 @@ namespace FinFinder.Web.Controllers
                             Content = c.Content,
                             UserName = c.User != null ? c.User.UserName : "Unknown",
                             DateCreated = c.DateCreated
-                         }).ToList()
+                         }).ToList(),
+                    LikesCount = fishCatch.Likes.Count,
+                IsLikedByCurrentUser = userId.HasValue && fishCatch.Likes.Any(l => l.UserId == userId.Value)
+
+
             };
 
             return View(model);

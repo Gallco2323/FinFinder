@@ -53,6 +53,23 @@
                 <strong>Fishing Technique:</strong> @Model.FishingTechniqueName<br />
                 <strong>Location:</strong> @Model.LocationName
             </p>
+            <h3>Likes</h3>
+            <div class="d-flex align-items-center mb-4">
+                <form asp-controller="Like" asp-action="Add" method="post" class="me-2">
+                    <input type="hidden" name="fishCatchId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-outline-primary" @(Model.IsLikedByCurrentUser ? "disabled" : "")>
+                        <i class="bi bi-hand-thumbs-up"></i> Like (@Model.LikesCount)
+                    </button>
+                </form>
+
+                <form asp-controller="Like" asp-action="Remove" method="post">
+                    <input type="hidden" name="fishCatchId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-outline-danger" @(Model.IsLikedByCurrentUser ? "" : "disabled")>
+                        <i class="bi bi-hand-thumbs-down"></i> Unlike
+                    </button>
+                </form>
+            </div>
+
 
             <!-- Publisher Information -->
             <div class="d-flex align-items-center mb-3">

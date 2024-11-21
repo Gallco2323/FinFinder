@@ -43,7 +43,10 @@ namespace FinFinder.Web.ViewModels.FishCatch
         [Required]
         public string PublisherName { get; set; }
         public string? PublisherProfilePictureURL { get; set; }
-        public Guid PublisherId { get; set; } 
+        public Guid PublisherId { get; set; }
+
+        public int LikesCount { get; set; }
+        public bool IsLikedByCurrentUser { get; set; }
     }
 
 
