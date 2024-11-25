@@ -26,16 +26,46 @@ namespace FinFinder.Web.Controllers
         }
 
         // INDEX
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string selectedFilter = "DatePosted")
         {
+            var filters = new List<SelectListItem>
+                {
+                    new SelectListItem { Value = "DatePosted", Text = "Date Posted" },
+                    new SelectListItem { Value = "MostLiked", Text = "Most Liked" },
+                    new SelectListItem { Value = "LeastLiked", Text = "Least Liked" },
+                    new SelectListItem { Value = "Alphabetical", Text = "Alphabetical" }
+                };
+
+            // Mark the selected filter
+            foreach (var filter in filters)
+            {
+                filter.Selected = filter.Value == selectedFilter;
+            }
+
             var fishCatches = await _context.FishCatches
                 .Where(fc => !fc.IsDeleted)
-                .AsNoTracking()
                 .Include(f => f.User)
                 .Include(f => f.Photos)
+                .Include(f => f.Likes)
                 .ToListAsync();
 
-            var model = fishCatches.Select(f => new FishCatchIndexViewModel
+            switch (selectedFilter)
+            {
+                case "MostLiked":
+                    fishCatches = fishCatches.OrderByDescending(fc => fc.Likes.Count).ToList();
+                    break;
+                case "LeastLiked":
+                    fishCatches = fishCatches.OrderBy(fc => fc.Likes.Count).ToList();
+                    break;
+                case "Alphabetical":
+                    fishCatches = fishCatches.OrderBy(fc => fc.Species).ToList();
+                    break;
+                default: // DatePosted
+                    fishCatches = fishCatches.OrderByDescending(fc => fc.DateCaught).ToList();
+                    break;
+            }
+
+            var catches =  fishCatches.Select(f => new FishCatchIndexViewModel
             {
                 Id = f.Id,
                 Species = f.Species,
@@ -47,6 +77,13 @@ namespace FinFinder.Web.Controllers
                 PublisherName = f.User.UserName,
                 PublisherId = f.UserId.ToString()
             }).ToList();
+
+            var model = new FishCatchFilterViewModel
+            {
+                SelectedFilter = selectedFilter,
+                Filters = filters,
+                FishCatches = catches
+            };
 
             return View(model);
         }
@@ -370,5 +407,8 @@ namespace FinFinder.Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+
+
     }
 }

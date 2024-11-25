@@ -1,14 +1,38 @@
 ﻿@using FinFinder.Web.ViewModels.FishCatch
-@model IEnumerable<FishCatchIndexViewModel>
+@model FishCatchFilterViewModel
 
 @{
     ViewData["Title"] = "All Fish Catches";
 }
 
 <h2 class="mb-4">All Fish Catches</h2>
-
+<form method="get" class="mb-4">
+    <div class="row g-3 align-items-center">
+        <div class="col-auto">
+            <label for="filter" class="col-form-label">Filter By:</label>
+        </div>
+        <div class="col-auto">
+            <select id="filter" name="selectedFilter" class="form-select">
+                @foreach (var filter in Model.Filters)
+                {
+                    if (filter.Selected)
+                    {
+                        <option value="@filter.Value" selected>@filter.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@filter.Value">@filter.Text</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Apply</button>
+        </div>
+    </div>
+</form>
 <div class="row">
-    @foreach (var fishCatch in Model)
+    @foreach (var fishCatch in Model.FishCatches)
     {
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm">
