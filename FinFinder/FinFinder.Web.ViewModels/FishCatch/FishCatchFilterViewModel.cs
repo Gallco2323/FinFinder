@@ -18,6 +18,7 @@ namespace FinFinder.Web.ViewModels.FishCatch
         new SelectListItem { Value = "Alphabetical", Text = "Alphabetical" }
     };
 
+        public string? SearchTerm { get; set; }
         public List<FishCatchIndexViewModel> FishCatches { get; set; } = new List<FishCatchIndexViewModel>();
     }
 

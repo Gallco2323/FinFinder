@@ -26,6 +26,7 @@ namespace FinFinder.Web.ViewModels.FishCatch
         public string PublisherId { get; set; }
 
         public DateTime DateCaught { get; set; }
+        public int LikesCount { get; set; }
 
         // Support for multiple photos
         public List<string> PhotoURLs { get; set; } = new List<string>();

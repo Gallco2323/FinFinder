@@ -26,7 +26,7 @@ namespace FinFinder.Web.Controllers
         }
 
         // INDEX
-        public async Task<IActionResult> Index(string selectedFilter = "DatePosted")
+        public async Task<IActionResult> Index(string selectedFilter = "DatePosted", string searchTerm = "")
         {
             var filters = new List<SelectListItem>
                 {
@@ -48,6 +48,14 @@ namespace FinFinder.Web.Controllers
                 .Include(f => f.Photos)
                 .Include(f => f.Likes)
                 .ToListAsync();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                fishCatches = fishCatches.Where(fc =>
+                    fc.Species.Contains(searchTerm) ||
+                    fc.LocationName.Contains(searchTerm) ||
+                    fc.User.UserName.Contains(searchTerm)).ToList();
+            }
 
             switch (selectedFilter)
             {
@@ -75,14 +83,16 @@ namespace FinFinder.Web.Controllers
                 DateCaught = f.DateCaught,
                 PhotoURLs = f.Photos.Select(p => p.Url).ToList(),
                 PublisherName = f.User.UserName,
-                PublisherId = f.UserId.ToString()
+                PublisherId = f.UserId.ToString(),
+                LikesCount = f.Likes.Count
             }).ToList();
 
             var model = new FishCatchFilterViewModel
             {
                 SelectedFilter = selectedFilter,
                 Filters = filters,
-                FishCatches = catches
+                FishCatches = catches,
+                SearchTerm = searchTerm
             };
 
             return View(model);
