@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "V+sU3Q1b4W+mri6HaSszgtDtCpH1GAhHKO001NDLosLxTbPD4cWzrplI8Pw48EVDK5110Q64NBMHFzlEW5phZg==",
+  "success": true,
+  "projectFilePath": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder.Services.Mapping\\FinFinder.Services.Mapping.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Guido\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
+    "C:\\Users\\Guido\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Guido\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\Guido\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\Guido\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "bSlOQ9zObqfiYWfYeOUThG9ui1qQFHxoIRzFaaRt5WigWAp0/xvNt77YI2+B3ckF0ff7uqTPXAQ2E9UAJdH6uw==",
+  "dgSpecHash": "rwDyGzmgBarSQs2aZHoYTEFIWZCa8iNwxrN8GgTCfMB2v9z5jvCbMnmSdWifOl91qDQ0NIwpKypwvrtzVUQz+g==",
   "success": true,
   "projectFilePath": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\FinFinder.Web.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Guido\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Guido\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Guido\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\Guido\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
