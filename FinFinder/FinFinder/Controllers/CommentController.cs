@@ -1,5 +1,7 @@
 ﻿using FinFinder.Data;
 using FinFinder.Data.Models;
+using FinFinder.Data.Repository.Interfaces;
+using FinFinder.Services.Data.Interfaces;
 using FinFinder.Web.ViewModels.Comment;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +12,16 @@ namespace FinFinder.Web.Controllers
 {
     public class CommentController : Controller
     {
-        private readonly FinFinderDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
+        
+        
+        private readonly ICommentService _commentService;
 
-        public CommentController(FinFinderDbContext context, UserManager<ApplicationUser> userManager)
+        public CommentController(  ICommentService commentService)
         {
-            _context = context;
-            _userManager = userManager;
+            
+           
+            _commentService = commentService;
+            
         }
 
         [HttpPost]
@@ -29,17 +34,7 @@ namespace FinFinder.Web.Controllers
 
             var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            var comment = new Comment
-            {
-                Id = Guid.NewGuid(),
-                Content = model.Content,
-                FishCatchId = model.FishCatchId,
-                UserId = userId,
-                DateCreated = DateTime.UtcNow
-            };
-
-            _context.Comments.Add(comment);
-            await _context.SaveChangesAsync();
+          await _commentService.AddCommentAsync(userId, model);
 
             return RedirectToAction("Details", "FishCatch", new { id = model.FishCatchId });
         }
@@ -47,18 +42,25 @@ namespace FinFinder.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var comment = await _context.Comments
-                .FirstOrDefaultAsync(c => c.Id == id);
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var comment = await _commentService.GetCommentByIdAsync(id); // Fetch the comment
 
-            if (comment == null || comment.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+            if (comment == null || comment.UserId != userId)
             {
                 return Unauthorized();
             }
 
-            _context.Comments.Remove(comment);
-            await _context.SaveChangesAsync();
+            var success = await _commentService.DeleteCommentAsync(id, userId);
 
+            if (!success)
+            {
+                return BadRequest("Unable to delete the comment.");
+            }
+
+            // Redirect using the associated FishCatchId
             return RedirectToAction("Details", "FishCatch", new { id = comment.FishCatchId });
+
+
         }
     }
 }

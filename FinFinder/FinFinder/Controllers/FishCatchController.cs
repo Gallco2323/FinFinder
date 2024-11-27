@@ -1,5 +1,6 @@
 ﻿using FinFinder.Data;
 using FinFinder.Data.Models;
+using FinFinder.Data.Repository.Interfaces;
 using FinFinder.Web.ViewModels.Comment;
 using FinFinder.Web.ViewModels.FishCatch;
 using FinFinder.Web.ViewModels.Profile;
@@ -18,11 +19,13 @@ namespace FinFinder.Web.Controllers
     {
         private readonly FinFinderDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private IRepository<FishCatch, Guid> _fishCatchRepository;
 
-        public FishCatchController(FinFinderDbContext context, UserManager<ApplicationUser> userManager)
+        public FishCatchController(FinFinderDbContext context, UserManager<ApplicationUser> userManager, IRepository<FishCatch, Guid> fishCatchRepository)
         {
             _context = context;
             _userManager = userManager;
+            _fishCatchRepository = fishCatchRepository;
         }
 
         // INDEX
@@ -391,6 +394,9 @@ namespace FinFinder.Web.Controllers
 
             var fishCatch = await _context.FishCatches
                 .Include(fc => fc.Photos)
+                .Include(fc => fc.Comments)
+                .Include(fc => fc.Likes)
+
                 .FirstOrDefaultAsync(fc => fc.Id == id && fc.UserId == userId);
 
             if (fishCatch == null)
@@ -410,6 +416,15 @@ namespace FinFinder.Web.Controllers
                     }
                 }
                 _context.Photos.RemoveRange(fishCatch.Photos);
+            }
+
+            if (fishCatch.Comments.Any())
+            {
+                _context.Comments.RemoveRange(fishCatch.Comments);
+            }
+            if (fishCatch.Likes.Any())
+            {
+                _context.Likes.RemoveRange(fishCatch.Likes);
             }
 
             _context.FishCatches.Remove(fishCatch); // Permanent delete

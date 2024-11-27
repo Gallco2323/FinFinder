@@ -25,6 +25,7 @@
     <ProjectReference Include="..\Common\FinFinder.Common.csproj" />
     <ProjectReference Include="..\FinFinder.Data\FinFinder.Data.csproj" />
     <ProjectReference Include="..\FinFinder.Services.Data\FinFinder.Services.Data.csproj" />
+    <ProjectReference Include="..\FinFinder.Services.Mapping\FinFinder.Services.Mapping.csproj" />
     <ProjectReference Include="..\FinFinder.Web.Infrastructure\FinFinder.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\FinFinder.Web.ViewModels\FinFinder.Web.ViewModels.csproj" />
   </ItemGroup>

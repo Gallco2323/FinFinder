@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,10 +24,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\FinFinder.Common.csproj" />
     <ProjectReference Include="..\FinFinder.Data.Models\FinFinder.Data.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repository\Interfaces\" />
   </ItemGroup>
 
 </Project>

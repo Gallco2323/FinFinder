@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinFinder.Services.Mapping
 {
-    internal interface IMapFrom
+    public interface IMapFrom<T>
     {
     }
 }

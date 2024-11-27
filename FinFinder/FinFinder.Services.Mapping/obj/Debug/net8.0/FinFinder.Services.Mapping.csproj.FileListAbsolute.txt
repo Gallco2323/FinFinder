@@ -1,0 +1,13 @@
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Services.Mapping\bin\Debug\net8.0\FinFinder.Services.Mapping.deps.json
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Services.Mapping\bin\Debug\net8.0\FinFinder.Services.Mapping.dll
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Services.Mapping\bin\Debug\net8.0\FinFinder.Services.Mapping.pdb
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Services.Mapping\obj\Debug\net8.0\FinFinder.Services.Mapping.csproj.AssemblyReference.cache
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Services.Mapping\obj\Debug\net8.0\FinFinder.Services.Mapping.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Services.Mapping\obj\Debug\net8.0\FinFinder.Services.Mapping.AssemblyInfoInputs.cache
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Services.Mapping\obj\Debug\net8.0\FinFinder.Services.Mapping.AssemblyInfo.cs
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Services.Mapping\obj\Debug\net8.0\FinFinder.Services.Mapping.csproj.CoreCompileInputs.cache
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Services.Mapping\obj\Debug\net8.0\FinFinder.Services.Mapping.sourcelink.json
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Services.Mapping\obj\Debug\net8.0\FinFinder.Services.Mapping.dll
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Services.Mapping\obj\Debug\net8.0\refint\FinFinder.Services.Mapping.dll
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Services.Mapping\obj\Debug\net8.0\FinFinder.Services.Mapping.pdb
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Services.Mapping\obj\Debug\net8.0\ref\FinFinder.Services.Mapping.dll

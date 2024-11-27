@@ -1,10 +1,17 @@
 using FinFinder.Data;
 using FinFinder.Data.Models;
+using FinFinder.Data.Repository.Interfaces;
+using FinFinder.Models;
+using FinFinder.Services.Mapping;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinFinder
 {
+    using FinFinder.Data.Repository;
+    using FinFinder.Services.Data;
+    using FinFinder.Services.Data.Interfaces;
+    using FinFinder.Web.Infrastructure.Extensions;
     public class Program
     {
         public static void Main(string[] args)
@@ -35,11 +42,24 @@ namespace FinFinder
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+            //builder.Services.AddScoped<IRepository<FishCatch, Guid>, BaseRepository<FishCatch, Guid>>();
+            //builder.Services.AddScoped<IRepository<FishingTechnique, Guid>, BaseRepository<FishingTechnique, Guid>>();
+            //builder.Services.AddScoped<IRepository<Like, Guid>, BaseRepository<Like, Guid>>();
+            //builder.Services.AddScoped<IRepository<Photo, Guid>, BaseRepository<Photo, Guid>>();
+            //builder.Services.AddScoped<IRepository<Favorite, object>, BaseRepository<Favorite, object>>();
+            //builder.Services.AddScoped<IRepository<Comment, Guid>, BaseRepository<Comment, Guid>>();
+            builder.Services.RegisterRepositories(typeof(ApplicationUser).Assembly);
+            builder.Services.AddScoped<ICommentService, CommentService>();
+
+
             //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<FinFinderDbContext>();
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();
 
             var app = builder.Build();
+
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).Assembly);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
