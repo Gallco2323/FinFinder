@@ -10,6 +10,7 @@ namespace FinFinder.Data.Models
 {
     public class Photo
     {
+        [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]

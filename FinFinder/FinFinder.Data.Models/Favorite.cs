@@ -15,11 +15,13 @@ namespace FinFinder.Data.Models
         
         
         [Required]
+        [Key]
         public Guid UserId { get; set; }
         [ForeignKey(nameof(UserId))]
         public ApplicationUser User { get; set; } = null!;
 
         [Required]
+        [Key]
         public Guid FishCatchId { get; set; }
 
         [ForeignKey(nameof(FishCatchId))]

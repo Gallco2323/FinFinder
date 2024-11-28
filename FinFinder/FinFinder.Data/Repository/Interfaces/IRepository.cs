@@ -24,7 +24,7 @@ namespace FinFinder.Data.Repository.Interfaces
         bool Delete(TId id);
         Task<bool> DeleteAsync(TId id);
 
-      
+       
 
         bool Update(TType entity);
         Task<bool> UpdateAsync(TType entity);

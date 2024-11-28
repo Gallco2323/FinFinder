@@ -71,6 +71,7 @@ namespace FinFinder.Data.Repository
             if (entity == null) return false;
 
             _dbSet.Remove(entity);
+          
             await _context.SaveChangesAsync();
             return true;
         }

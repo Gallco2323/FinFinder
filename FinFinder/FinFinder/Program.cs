@@ -49,12 +49,15 @@ namespace FinFinder
             //builder.Services.AddScoped<IRepository<Favorite, object>, BaseRepository<Favorite, object>>();
             //builder.Services.AddScoped<IRepository<Comment, Guid>, BaseRepository<Comment, Guid>>();
             builder.Services.RegisterRepositories(typeof(ApplicationUser).Assembly);
+            builder.Services.AddScoped<IRepository<Favorite, object>, BaseRepository<Favorite, object>>();
+
 
             builder.Services.AddScoped<ICommentService, CommentService>();
             builder.Services.AddScoped<IFavoriteService, FavoriteService>();
             builder.Services.AddScoped<ILikeService, LikeService>();
             builder.Services.AddScoped<IProfileService, ProfileService>();
             builder.Services.AddScoped<IHomeService, HomeService>();
+            builder.Services.AddScoped<IFishCatchService, FishCatchService>();
 
 
 

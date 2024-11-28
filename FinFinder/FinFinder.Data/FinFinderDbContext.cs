@@ -26,6 +26,12 @@ namespace FinFinder.Data
         {
             base.OnModelCreating(builder);
 
+         builder.Entity<Favorite>()
+       .HasOne(f => f.FishCatch)
+       .WithMany(fc => fc.Favorites)
+       .HasForeignKey(f => f.FishCatchId)
+       .OnDelete(DeleteBehavior.Cascade);
+
             // Additional configuration for entities if needed
             builder.Entity<FishingTechnique>().HasData(
         new FishingTechnique { Id = Guid.NewGuid(), Name = "Fly Fishing" },

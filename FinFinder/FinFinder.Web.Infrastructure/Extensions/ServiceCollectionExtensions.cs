@@ -28,35 +28,46 @@ namespace FinFinder.Web.Infrastructure.Extensions
               
             foreach (var modelType in modelTypes)
             {
-                Type repositoryInterface = typeof(IRepository<,>);
-                Type repositoryInstanceType = typeof(BaseRepository<,>);
+                var keyProperties = modelType.GetProperties()
+            .Where(p => Attribute.IsDefined(p, typeof(KeyAttribute)))
+            .ToArray();
 
-                PropertyInfo idProperty  =modelType.GetProperties()
-                    .Where(m=> Attribute
-                    .IsDefined(m, typeof(KeyAttribute)))
-                    .SingleOrDefault();
-
-                Type[] constructArgs = new Type[2];
-                constructArgs[0] = modelType;
-                if (idProperty == null)
+                if (keyProperties.Length == 1)
                 {
-                    constructArgs[1] = typeof(object);
-                   
+                    // Single primary key
+                    RegisterSingleKeyRepository(services, modelType, keyProperties[0].PropertyType);
+                }
+                else if (keyProperties.Length > 1)
+                {
+                    // Composite primary key
+                    RegisterCompositeKeyRepository(services, modelType, keyProperties.Select(p => p.PropertyType).ToArray());
                 }
                 else
                 {
-                    constructArgs[1] = idProperty.PropertyType;
-                    
+                    // No primary key defined
+                    RegisterSingleKeyRepository(services, modelType, typeof(object));
                 }
-               
-                    repositoryInterface = repositoryInterface.MakeGenericType(constructArgs);
-                repositoryInstanceType = repositoryInstanceType.MakeGenericType(constructArgs);
-
-                services.AddScoped(repositoryInterface, repositoryInstanceType);
-
 
             }
             
+        }
+        private static void RegisterSingleKeyRepository(IServiceCollection services, Type modelType, Type idType)
+        {
+            Type repositoryInterface = typeof(IRepository<,>).MakeGenericType(modelType, idType);
+            Type repositoryImplementation = typeof(BaseRepository<,>).MakeGenericType(modelType, idType);
+
+            services.AddScoped(repositoryInterface, repositoryImplementation);
+        }
+
+        private static void RegisterCompositeKeyRepository(IServiceCollection services, Type modelType, Type[] keyTypes)
+        {
+            if (keyTypes.Length != 2)
+                throw new InvalidOperationException($"CompositeKeyRepository supports exactly 2 key properties. Found {keyTypes.Length} for {modelType.Name}.");
+
+            Type repositoryInterface = typeof(ICompositeKeyRepository<,,>).MakeGenericType(modelType, keyTypes[0], keyTypes[1]);
+            Type repositoryImplementation = typeof(CompositeKeyRepository<,,>).MakeGenericType(modelType, keyTypes[0], keyTypes[1]);
+
+            services.AddScoped(repositoryInterface, repositoryImplementation);
         }
     }
 }

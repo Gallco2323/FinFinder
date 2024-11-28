@@ -16,10 +16,10 @@ namespace FinFinder.Services.Data
 
     public class FavoriteService : IFavoriteService
     {
-        private IRepository<Favorite, object> _favoriteRepository;
+        private readonly ICompositeKeyRepository<Favorite, Guid, Guid> _favoriteRepository;
         private IRepository<FishCatch, Guid> _fishCatchRepository;
 
-        public FavoriteService(IRepository<Favorite, object> favoriteRepository, IRepository<FishCatch, Guid> fishCatchRepository)
+        public FavoriteService(ICompositeKeyRepository<Favorite, Guid, Guid> favoriteRepository, IRepository<FishCatch, Guid> fishCatchRepository)
         {
             _favoriteRepository = favoriteRepository;
             _fishCatchRepository = fishCatchRepository;
@@ -60,7 +60,7 @@ namespace FinFinder.Services.Data
                 return false;
             }
 
-            await _favoriteRepository.DeleteAsync(favorite.FishCatchId);
+            await _favoriteRepository.DeleteByCompositeKeyAsync( userId, favorite.FishCatchId);
             return true;
         }
     }
