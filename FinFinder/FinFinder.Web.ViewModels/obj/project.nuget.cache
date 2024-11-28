@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "2apnM4g6IRQZBEiwM6vbghmyp2TxIhw+mcivXHbWolqh0Oosf2FwWps888uxc2zXDrXNov62iFscB4NsQMU8tA==",
+  "dgSpecHash": "BUuTVTZNquR3U7SJedrqGml4LbqV2+oEmf6gnyUfdX9/CHAn6F6yeF+kiTs7SpKfPZX7yAk48iIPu5Dz+HjWoQ==",
   "success": true,
   "projectFilePath": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder.Web.ViewModels\\FinFinder.Web.ViewModels.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Guido\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Guido\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Guido\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\Guido\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",

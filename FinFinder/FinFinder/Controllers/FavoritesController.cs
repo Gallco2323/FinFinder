@@ -1,4 +1,5 @@
 ﻿using FinFinder.Data;
+using FinFinder.Services.Data.Interfaces;
 using FinFinder.Web.ViewModels.FishCatch;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,32 +12,21 @@ namespace FinFinder.Web.Controllers
     {
         private readonly FinFinderDbContext _context;
 
-        public FavoritesController(FinFinderDbContext context)
+        private readonly IFavoriteService _favoriteService;
+
+        public FavoritesController(FinFinderDbContext context, IFavoriteService favoriteService)
         {
             _context = context;
+            _favoriteService = favoriteService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var favorites = await _context.Favorites
-         .Where(f => f.FishCatch.IsDeleted == false) // Exclude soft-deleted FishCatches
-         .Where(f => f.UserId == userId) // Favorites for the current user
-         .Include(f => f.FishCatch) // Include FishCatch details
-         .ThenInclude(fc => fc.Photos) // Include associated photos
-         .Include(f => f.FishCatch.User) // Include publisher details
-         .Select(f => new FishCatchFavoriteViewModel
-         {
-             FishCatchId = f.FishCatchId,
-             Species = f.FishCatch.Species,
-             LocationName = f.FishCatch.LocationName, // Use only the display-friendly location name
-             DateCaught = f.FishCatch.DateCaught,
-             PhotoURLs = f.FishCatch.Photos.Select(p => p.Url).ToList(),
-             PublisherName = f.FishCatch.User.UserName
-         })
-         .ToListAsync();
+        
 
+          var favorites =  await _favoriteService.GetUserFavoritesAsync(userId);
 
             return View(favorites);
         }
@@ -49,15 +39,7 @@ namespace FinFinder.Web.Controllers
             var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             // Find the favorite entry for the current user and specified FishCatch
-            var favorite = await _context.Favorites
-                .Where(f => f.FishCatch.IsDeleted == false)
-                .FirstOrDefaultAsync(f => f.UserId == userId && f.FishCatchId == id);
-
-            if (favorite != null)
-            {
-                _context.Favorites.Remove(favorite);
-                await _context.SaveChangesAsync();
-            }
+         await  _favoriteService.RemoveFavoriteAsync(userId, id);
 
             return RedirectToAction("Index"); // Redirect back to the favorites list
         }

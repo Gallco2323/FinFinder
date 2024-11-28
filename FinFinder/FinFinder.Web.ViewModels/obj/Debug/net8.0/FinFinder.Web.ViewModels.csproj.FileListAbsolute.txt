@@ -21,8 +21,10 @@ D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFind
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Web.ViewModels\bin\Debug\net8.0\FinFinder.Web.ViewModels.pdb
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Web.ViewModels\bin\Debug\net8.0\FinFinder.Common.dll
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Web.ViewModels\bin\Debug\net8.0\FinFinder.Data.Models.dll
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Web.ViewModels\bin\Debug\net8.0\FinFinder.Services.Mapping.dll
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Web.ViewModels\bin\Debug\net8.0\FinFinder.Common.pdb
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Web.ViewModels\bin\Debug\net8.0\FinFinder.Data.Models.pdb
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Web.ViewModels\bin\Debug\net8.0\FinFinder.Services.Mapping.pdb
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Web.ViewModels\obj\Debug\net8.0\FinFinder.Web.ViewModels.csproj.AssemblyReference.cache
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Web.ViewModels\obj\Debug\net8.0\FinFinder.Web.ViewModels.GeneratedMSBuildEditorConfig.editorconfig
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder.Web.ViewModels\obj\Debug\net8.0\FinFinder.Web.ViewModels.AssemblyInfoInputs.cache

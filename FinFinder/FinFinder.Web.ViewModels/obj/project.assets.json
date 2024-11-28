@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "AutoMapper/13.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Options": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Azure.Core/1.35.0": {
         "type": "package",
         "dependencies": {
@@ -2989,10 +3005,38 @@
         "runtime": {
           "bin/placeholder/FinFinder.Data.Models.dll": {}
         }
+      },
+      "FinFinder.Services.Mapping/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "AutoMapper": "13.0.1"
+        },
+        "compile": {
+          "bin/placeholder/FinFinder.Services.Mapping.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FinFinder.Services.Mapping.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "AutoMapper/13.0.1": {
+      "sha512": "/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
+      "type": "package",
+      "path": "automapper/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.13.0.1.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/net6.0/AutoMapper.dll",
+        "lib/net6.0/AutoMapper.xml"
+      ]
+    },
     "Azure.Core/1.35.0": {
       "sha512": "hENcx03Jyuqv05F4RBEPbxz29UrM3Nbhnr6Wl6NQpoU9BCIbL3XLentrxDCTrH54NLS11Exxi/o8MYgT/cnKFA==",
       "type": "package",
@@ -8619,12 +8663,18 @@
       "type": "project",
       "path": "../FinFinder.Data.Models/FinFinder.Data.Models.csproj",
       "msbuildProject": "../FinFinder.Data.Models/FinFinder.Data.Models.csproj"
+    },
+    "FinFinder.Services.Mapping/1.0.0": {
+      "type": "project",
+      "path": "../FinFinder.Services.Mapping/FinFinder.Services.Mapping.csproj",
+      "msbuildProject": "../FinFinder.Services.Mapping/FinFinder.Services.Mapping.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "FinFinder.Common >= 1.0.0",
       "FinFinder.Data.Models >= 1.0.0",
+      "FinFinder.Services.Mapping >= 1.0.0",
       "Microsoft.AspNetCore.Mvc.ViewFeatures >= 2.2.0"
     ]
   },
@@ -8666,6 +8716,9 @@
             },
             "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder.Data.Models\\FinFinder.Data.Models.csproj": {
               "projectPath": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder.Data.Models\\FinFinder.Data.Models.csproj"
+            },
+            "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder.Services.Mapping\\FinFinder.Services.Mapping.csproj": {
+              "projectPath": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder.Services.Mapping\\FinFinder.Services.Mapping.csproj"
             }
           }
         }

@@ -105,7 +105,7 @@ namespace FinFinder.Data.Repository
             return await _dbSet.ToListAsync();
         }
 
-        public IEnumerable<TType> GetAllAttached()
+        public IQueryable<TType> GetAllAttached()
         {
             return this._dbSet.AsQueryable();
         }

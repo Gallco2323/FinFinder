@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\FinFinder.Common.csproj" />
     <ProjectReference Include="..\FinFinder.Data.Models\FinFinder.Data.Models.csproj" />
+    <ProjectReference Include="..\FinFinder.Services.Mapping\FinFinder.Services.Mapping.csproj" />
   </ItemGroup>
 
 </Project>

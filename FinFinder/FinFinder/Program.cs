@@ -49,7 +49,9 @@ namespace FinFinder
             //builder.Services.AddScoped<IRepository<Favorite, object>, BaseRepository<Favorite, object>>();
             //builder.Services.AddScoped<IRepository<Comment, Guid>, BaseRepository<Comment, Guid>>();
             builder.Services.RegisterRepositories(typeof(ApplicationUser).Assembly);
+
             builder.Services.AddScoped<ICommentService, CommentService>();
+            builder.Services.AddScoped<IFavoriteService, FavoriteService>();
 
 
             //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

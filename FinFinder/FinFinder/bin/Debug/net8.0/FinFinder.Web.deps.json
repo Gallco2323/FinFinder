@@ -3194,6 +3194,7 @@
         "dependencies": {
           "FinFinder.Common": "1.0.0",
           "FinFinder.Data.Models": "1.0.0",
+          "FinFinder.Services.Mapping": "1.0.0",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "2.2.0"
         },
         "runtime": {
