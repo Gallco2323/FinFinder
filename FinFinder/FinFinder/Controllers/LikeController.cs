@@ -1,5 +1,6 @@
 ﻿using FinFinder.Data;
 using FinFinder.Data.Models;
+using FinFinder.Services.Data.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,11 +11,13 @@ namespace FinFinder.Web.Controllers
     [Authorize]
     public class LikeController : Controller
     {
-        private readonly FinFinderDbContext _context;
+      
+        private readonly ILikeService _likeService;
 
-        public LikeController(FinFinderDbContext context)
+        public LikeController( ILikeService likeService)
         {
-            _context = context;
+          
+            _likeService = likeService;
         }
 
         [HttpPost]
@@ -22,20 +25,11 @@ namespace FinFinder.Web.Controllers
         {
             var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            var existingLike = await _context.Likes
-                .FirstOrDefaultAsync(l => l.FishCatchId == fishCatchId && l.UserId == userId);
+            var success = await _likeService.AddLikeAsync(fishCatchId, userId);
 
-            if (existingLike == null)
+            if (!success)
             {
-                var like = new Like
-                {
-                    Id = Guid.NewGuid(),
-                    FishCatchId = fishCatchId,
-                    UserId = userId
-                };
-
-                _context.Likes.Add(like);
-                await _context.SaveChangesAsync();
+                TempData["Error"] = "You have already liked this post.";
             }
 
             return RedirectToAction("Details", "FishCatch", new { id = fishCatchId });
@@ -46,13 +40,11 @@ namespace FinFinder.Web.Controllers
         {
             var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            var like = await _context.Likes
-                .FirstOrDefaultAsync(l => l.FishCatchId == fishCatchId && l.UserId == userId);
+            var success = await _likeService.RemoveLikeAsync(fishCatchId, userId);
 
-            if (like != null)
+            if (!success)
             {
-                _context.Likes.Remove(like);
-                await _context.SaveChangesAsync();
+                TempData["Error"] = "You have not liked this post.";
             }
 
             return RedirectToAction("Details", "FishCatch", new { id = fishCatchId });
