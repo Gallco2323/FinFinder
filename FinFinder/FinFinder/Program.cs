@@ -54,6 +54,7 @@ namespace FinFinder
             builder.Services.AddScoped<IFavoriteService, FavoriteService>();
             builder.Services.AddScoped<ILikeService, LikeService>();
             builder.Services.AddScoped<IProfileService, ProfileService>();
+            builder.Services.AddScoped<IHomeService, HomeService>();
 
 
 
