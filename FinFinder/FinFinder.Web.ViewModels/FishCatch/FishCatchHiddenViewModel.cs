@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinFinder.Services.Mapping;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace FinFinder.Web.ViewModels.FishCatch
 {
-    public class FishCatchHiddenViewModel
+    using FinFinder.Data.Models;
+    public class FishCatchHiddenViewModel : IMapFrom<FishCatch>
     {
         public Guid Id { get; set; }
         public string Species { get; set; }
