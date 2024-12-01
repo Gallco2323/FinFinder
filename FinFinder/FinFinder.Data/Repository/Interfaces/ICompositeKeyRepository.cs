@@ -14,5 +14,8 @@ namespace FinFinder.Data.Repository.Interfaces
         bool DeleteByCompositeKey(TKey1 key1, TKey2 key2);
         Task<bool> DeleteByCompositeKeyAsync(TKey1 key1, TKey2 key2);
         IQueryable<TEntity> GetAllAttached();
+
+        void Add(TEntity entity); // Add method
+        Task AddAsync(TEntity entity);
     }
 }

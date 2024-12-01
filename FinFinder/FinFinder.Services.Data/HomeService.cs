@@ -17,16 +17,19 @@ namespace FinFinder.Services.Data
     {
         private readonly IRepository<FishCatch, Guid> _fishCatchRepository;
         private readonly IRepository<FishingTechnique, Guid> _fishingTechniqueRepository;
+        private readonly IRepository<Comment, Guid> _commentRepository;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public HomeService(
             IRepository<FishCatch, Guid> fishCatchRepository,
             IRepository<FishingTechnique, Guid> fishingTechniqueRepository,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IRepository<Comment, Guid> commentRepository)
         {
             _fishCatchRepository = fishCatchRepository;
             _fishingTechniqueRepository = fishingTechniqueRepository;
             _userManager = userManager;
+            _commentRepository = commentRepository;
         }
         public async Task<List<FishCatchIndexViewModel>> GetFeaturedFishCatchesAsync()
         {
@@ -77,6 +80,11 @@ namespace FinFinder.Services.Data
             .ToListAsync();
 
             return recentActivities;
+        }
+
+        public async Task<int> GetTotalCommentsAsync()
+        {
+            return await _commentRepository.GetAllAttached().CountAsync();
         }
 
         public async Task<int> GetTotalFishCatchesAsync()

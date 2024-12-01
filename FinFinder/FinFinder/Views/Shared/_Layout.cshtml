@@ -45,6 +45,12 @@
                                 <a class="nav-link" asp-area="" asp-controller="Favorites" asp-action="Index">Favorites</a>
                             </li>
                         }
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-danger fw-bold" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Admin Panel</a>
+                            </li>
+                        }
                     </ul>
 
                     <!-- User authentication links (Login/Register or Logout) -->

@@ -19,13 +19,13 @@ namespace FinFinder.Web.Controllers
     public class FishCatchController : Controller
     {
         private readonly IFishCatchService _fishCatchService;
-        private readonly UserManager<ApplicationUser> _userManager;
+      
        
 
         public FishCatchController(IFishCatchService fishCatchService, UserManager<ApplicationUser> userManager, IRepository<FishCatch, Guid> fishCatchRepository)
         {
             _fishCatchService = fishCatchService;
-            _userManager = userManager;
+            
             
         }
 

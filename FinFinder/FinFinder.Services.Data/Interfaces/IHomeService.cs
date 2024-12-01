@@ -1,4 +1,5 @@
-﻿using FinFinder.Web.ViewModels.FishCatch;
+﻿using FinFinder.Web.ViewModels.Admin;
+using FinFinder.Web.ViewModels.FishCatch;
 using FinFinder.Web.ViewModels.Home;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,8 @@ namespace FinFinder.Services.Data.Interfaces
         Task<string> GetMostPopularTechniqueAsync();
         Task<List<ActivityViewModel>> GetRecentActivitiesAsync();
         Task<List<FishCatchIndexViewModel>> GetUserRecentCatchesAsync(Guid userId);
+        Task<int> GetTotalCommentsAsync();
+        
+
     }
 }

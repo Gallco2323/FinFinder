@@ -60,5 +60,24 @@ namespace FinFinder.Data.Repository
         {
             return _dbSet.AsQueryable();
         }
+
+        public void Add(TEntity entity)
+        {
+
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            _dbSet.Add(entity);
+            _context.SaveChanges();
+        }
+
+        public async Task AddAsync(TEntity entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            await _dbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
+        }
     }
 }

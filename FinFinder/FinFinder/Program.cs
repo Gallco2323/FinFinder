@@ -12,8 +12,10 @@ namespace FinFinder
     using FinFinder.Services.Data;
     using FinFinder.Services.Data.Interfaces;
     using FinFinder.Web.Infrastructure.Extensions;
+    using FinFinder.Data.Seeders;
     public class Program
     {
+        
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -49,7 +51,7 @@ namespace FinFinder
             //builder.Services.AddScoped<IRepository<Favorite, object>, BaseRepository<Favorite, object>>();
             //builder.Services.AddScoped<IRepository<Comment, Guid>, BaseRepository<Comment, Guid>>();
             builder.Services.RegisterRepositories(typeof(ApplicationUser).Assembly);
-            builder.Services.AddScoped<IRepository<Favorite, object>, BaseRepository<Favorite, object>>();
+            
 
 
             builder.Services.AddScoped<ICommentService, CommentService>();
@@ -70,6 +72,14 @@ namespace FinFinder
             var app = builder.Build();
 
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).Assembly);
+            // Role seeding logic
+            using (var scope = app.Services.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                Task.Run(() => SeedData.SeedRolesAsync(roleManager, userManager)).GetAwaiter().GetResult();
+            }
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -91,6 +101,10 @@ namespace FinFinder
             app.UseAuthentication();
 
             app.UseAuthorization();
+            
+            app.MapControllerRoute(
+                name: "admin",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",

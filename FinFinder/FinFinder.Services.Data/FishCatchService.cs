@@ -19,7 +19,7 @@ namespace FinFinder.Services.Data
         private readonly IRepository<FishCatch, Guid> _fishCatchRepository;
         private readonly IRepository<FishingTechnique, Guid> _fishingTechniqueRepository;
         private readonly IRepository<Photo, Guid> _photoRepository;
-        private readonly IRepository<Favorite, object> _favoriteRepository;
+        private readonly ICompositeKeyRepository<Favorite, Guid,Guid> _favoriteRepository;
         private readonly IRepository<Comment, Guid> _commentRepository;
         private readonly IRepository<Like, Guid> _likeRepository;
 
@@ -27,7 +27,7 @@ namespace FinFinder.Services.Data
             IRepository<FishCatch, Guid> fishCatchRepository,
             IRepository<FishingTechnique, Guid> fishingTechniqueRepository,
             IRepository<Photo, Guid> photoRepository,
-            IRepository<Favorite, object> favoriteRepository,
+            ICompositeKeyRepository<Favorite, Guid, Guid> favoriteRepository,
         IRepository<Comment, Guid> commentRepository,
             IRepository<Like, Guid> likeRepository
             )
@@ -235,7 +235,7 @@ namespace FinFinder.Services.Data
             var favoritesToDelete = fishCatch.Favorites.ToList();
             foreach (var favorite in favoritesToDelete)
             {
-                await _favoriteRepository.DeleteAsync(new { favorite.UserId, favorite.FishCatchId });
+                await _favoriteRepository.DeleteByCompositeKeyAsync(favorite.UserId, favorite.FishCatchId);
             }
 
             var commentsToDelete = fishCatch.Comments.ToList(); // Create a copy of the collection
