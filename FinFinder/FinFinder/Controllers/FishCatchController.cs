@@ -86,29 +86,43 @@ namespace FinFinder.Web.Controllers
 
         // EDIT POST
         [HttpPost]
-        [HttpPost]
+       
         public async Task<IActionResult> Edit(Guid id, FishCatchEditViewModel model)
         {
             if (id != model.Id)
+            {
+                TempData["Error"] = "Fish catch not found.";
                 return NotFound();
+            }
 
             if (!ModelState.IsValid)
             {
-                var editModel = await _fishCatchService.PrepareEditViewModelAsync(id, Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+                // Reload required properties on validation errors
+                var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var editModel = await _fishCatchService.PrepareEditViewModelAsync(id, userId);
+
+                if (editModel == null)
+                {
+                    TempData["Error"] = "You are not authorized to edit this fish catch.";
+                    return Unauthorized();
+                }
+
                 model.FishingTechniques = editModel.FishingTechniques;
                 model.ExistingPhotos = editModel.ExistingPhotos;
+
                 return View(model);
             }
 
-            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var success = await _fishCatchService.UpdateFishCatchAsync(model, userId);
+            var userIdCheck = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var success = await _fishCatchService.UpdateFishCatchAsync(model, userIdCheck);
 
             if (!success)
             {
-                ModelState.AddModelError("", "An error occurred while updating the fish catch.");
+                TempData["Error"] = "An error occurred while updating the fish catch.";
                 return View(model);
             }
 
+            TempData["Success"] = "Fish catch updated successfully.";
             return RedirectToAction(nameof(Index));
         }
 

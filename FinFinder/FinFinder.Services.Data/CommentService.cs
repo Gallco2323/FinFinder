@@ -2,6 +2,7 @@
 using FinFinder.Data.Repository.Interfaces;
 using FinFinder.Services.Data.Interfaces;
 using FinFinder.Web.ViewModels.Comment;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,33 @@ namespace FinFinder.Services.Data
             }
 
             return await _commentRepository.DeleteAsync(commentId);
+        }
+        public async Task<bool> AdminDeleteCommentAsync(Guid commentId)
+        {
+            var comment = await _commentRepository.GetByIdAsync(commentId);
+
+            if (comment == null)
+            {
+                return false; // Not found
+            }
+
+            return await _commentRepository.DeleteAsync(commentId);
+        }
+        public async Task<IEnumerable<CommentViewModel>> GetAllCommentsAsync()
+        {
+            var comments = await _commentRepository
+      .GetAllAttached() // Using GetAllAttached to allow Include
+      .Include(c => c.User) // Include User for each Comment
+      .ToListAsync();
+
+            return comments.Select(c => new CommentViewModel
+            {
+                Id = c.Id,
+                Content = c.Content,
+                UserName = c.User?.UserName ?? "Unknown",
+             FishCatchId = c.FishCatchId.ToString(),
+                DateCreated = c.DateCreated
+            });
         }
 
         public async Task<Comment?> GetCommentByIdAsync(Guid commentId)

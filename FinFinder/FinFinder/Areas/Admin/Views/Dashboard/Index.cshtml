@@ -42,7 +42,7 @@
                 <div class="card-body">
                     <h5 class="card-title text-danger">Total Comments</h5>
                     <p class="display-4 fw-bold text-dark">@Model.TotalComments</p>
-                    <a asp-controller="Comment" asp-action="Index" class="btn btn-outline-danger btn-sm">Manage Comments</a>
+                    <a asp-area="Admin" asp-controller="AdminComment" asp-action="Index" class="btn btn-outline-info btn-sm">Manage Comments</a>
                 </div>
             </div>
         </div>

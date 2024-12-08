@@ -21,7 +21,9 @@ namespace FinFinder.Services.Data.Interfaces
         
         Task<Comment?> GetCommentByIdAsync(Guid commentId);
 
-        
+        Task<IEnumerable<CommentViewModel>> GetAllCommentsAsync();
+
         Task<bool> CanUserDeleteCommentAsync(Guid commentId, Guid userId);
+        Task<bool> AdminDeleteCommentAsync(Guid commentId);
     }
 }

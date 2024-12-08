@@ -13,12 +13,16 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\187c9c99-18fc-4773-bd4d-ad2bf383d167_original.jpeg",
-      "PackagePath": "staticwebassets\\images\\187c9c99-18fc-4773-bd4d-ad2bf383d167_original.jpeg"
+      "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\27836cb7-7880-49fb-aba9-9a8fab383c59_trout.webp",
+      "PackagePath": "staticwebassets\\images\\27836cb7-7880-49fb-aba9-9a8fab383c59_trout.webp"
     },
     {
       "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\378328d2-b0ff-4a77-8e9c-dbe495f3eccb_trout.webp",
       "PackagePath": "staticwebassets\\images\\378328d2-b0ff-4a77-8e9c-dbe495f3eccb_trout.webp"
+    },
+    {
+      "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\433fe7a9-9ea3-4345-9ba6-0b6a0eaaa593_Pike2.jpg",
+      "PackagePath": "staticwebassets\\images\\433fe7a9-9ea3-4345-9ba6-0b6a0eaaa593_Pike2.jpg"
     },
     {
       "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\4efe1c8e-e635-46ae-9543-cf8d7a91d1b4_Screenshot 2024-11-14 090051.png",
@@ -41,6 +45,10 @@
       "PackagePath": "staticwebassets\\images\\76120be0-ce7c-406b-a407-40aa59833516_ehh.webp"
     },
     {
+      "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\788f8c99-428e-46c7-8ce0-d37782cbf51d_Screenshot 2024-11-13 225150.png",
+      "PackagePath": "staticwebassets\\images\\788f8c99-428e-46c7-8ce0-d37782cbf51d_Screenshot 2024-11-13 225150.png"
+    },
+    {
       "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\7f78ff27-7fea-4f6c-aa18-240dcf35b98b_Grass carp.webp",
       "PackagePath": "staticwebassets\\images\\7f78ff27-7fea-4f6c-aa18-240dcf35b98b_Grass carp.webp"
     },
@@ -51,10 +59,6 @@
     {
       "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\9141652f-23f1-4d7e-81ac-b40eae302bd2_Capture.PNG",
       "PackagePath": "staticwebassets\\images\\9141652f-23f1-4d7e-81ac-b40eae302bd2_Capture.PNG"
-    },
-    {
-      "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\94561b73-0be6-4c62-888e-231b0f7ef808_Pike2.jpg",
-      "PackagePath": "staticwebassets\\images\\94561b73-0be6-4c62-888e-231b0f7ef808_Pike2.jpg"
     },
     {
       "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\9828b006-be6c-4af6-8f82-0b102fa925fc_b55im3-scaled-1.jpg",
@@ -73,6 +77,10 @@
       "PackagePath": "staticwebassets\\images\\a1a2a576-ad2a-467a-9d58-6a83b97696e7_WIN_20211003_21_02_16_Pro.jpg"
     },
     {
+      "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\a4e0a218-2d3a-48b9-a816-86f0a959d4d5_original.jpeg",
+      "PackagePath": "staticwebassets\\images\\a4e0a218-2d3a-48b9-a816-86f0a959d4d5_original.jpeg"
+    },
+    {
       "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\a8f2a5e3-a9f7-4497-9bf3-4f842915037f_original.jpeg",
       "PackagePath": "staticwebassets\\images\\a8f2a5e3-a9f7-4497-9bf3-4f842915037f_original.jpeg"
     },
@@ -81,16 +89,8 @@
       "PackagePath": "staticwebassets\\images\\ab8360e8-e886-49d4-91a3-9de790fda99b_Pike2.jpg"
     },
     {
-      "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\b68aa0f2-466b-42bf-a999-08b4469b8b26_Grass carp.webp",
-      "PackagePath": "staticwebassets\\images\\b68aa0f2-466b-42bf-a999-08b4469b8b26_Grass carp.webp"
-    },
-    {
       "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\ba60f643-cf5f-4e21-8e6a-593c88e244c4_Grass carp.webp",
       "PackagePath": "staticwebassets\\images\\ba60f643-cf5f-4e21-8e6a-593c88e244c4_Grass carp.webp"
-    },
-    {
-      "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\bd1ec43d-ac7d-4e3f-ac72-d903df77d297_trout.webp",
-      "PackagePath": "staticwebassets\\images\\bd1ec43d-ac7d-4e3f-ac72-d903df77d297_trout.webp"
     },
     {
       "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\c783de43-849c-482e-9bdb-36203d48abd1_Screenshot 2024-11-14 090051.png",

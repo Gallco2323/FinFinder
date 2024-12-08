@@ -1,4 +1,5 @@
-﻿using FinFinder.Web.ViewModels.FishCatch;
+﻿using FinFinder.Data.Models;
+using FinFinder.Web.ViewModels.FishCatch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace FinFinder.Services.Data.Interfaces
         Task<bool> SoftDeleteFishCatchAsync(Guid fishCatchId, Guid userId);
         Task<bool> PermanentDeleteFishCatchAsync(Guid fishCatchId, Guid userId);
         Task<IEnumerable<ManageFishCatchViewModel>> GetAllFishCatchesAsync();
+        Task<FishCatch> GetFishCatchByIdAsync(Guid id);
 
     }
 }

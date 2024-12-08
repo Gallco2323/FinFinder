@@ -3,6 +3,7 @@ using FinFinder.Data.Repository.Interfaces;
 using FinFinder.Services.Data.Interfaces;
 using FinFinder.Web.ViewModels.Comment;
 using FinFinder.Web.ViewModels.FishCatch;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,6 +23,7 @@ namespace FinFinder.Services.Data
         private readonly ICompositeKeyRepository<Favorite, Guid,Guid> _favoriteRepository;
         private readonly IRepository<Comment, Guid> _commentRepository;
         private readonly IRepository<Like, Guid> _likeRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public FishCatchService(
             IRepository<FishCatch, Guid> fishCatchRepository,
@@ -29,7 +31,8 @@ namespace FinFinder.Services.Data
             IRepository<Photo, Guid> photoRepository,
             ICompositeKeyRepository<Favorite, Guid, Guid> favoriteRepository,
         IRepository<Comment, Guid> commentRepository,
-            IRepository<Like, Guid> likeRepository
+            IRepository<Like, Guid> likeRepository,
+            UserManager<ApplicationUser> userManager
             )
         {
             _fishCatchRepository = fishCatchRepository;
@@ -38,6 +41,7 @@ namespace FinFinder.Services.Data
             _favoriteRepository = favoriteRepository;
             _commentRepository = commentRepository;
             _likeRepository = likeRepository;
+            _userManager = userManager;
         }
 
         public async Task<bool> AddToFavoritesAsync(Guid fishCatchId, Guid userId)
@@ -57,6 +61,8 @@ namespace FinFinder.Services.Data
             };
 
             await _favoriteRepository.AddAsync(favorite);
+
+            
             return true;
         }
         public async Task<IEnumerable<ManageFishCatchViewModel>> GetAllFishCatchesAsync()
@@ -121,7 +127,13 @@ namespace FinFinder.Services.Data
 
             return true;
         }
-    
+
+        public async Task<FishCatch> GetFishCatchByIdAsync(Guid id)
+        {
+            return await _fishCatchRepository.GetByIdAsync(id);
+        }
+
+
 
         public async Task<FishCatchFilterViewModel> GetFilteredFishCatchesAsync(string selectedFilter, string searchTerm)
         {
@@ -192,6 +204,7 @@ namespace FinFinder.Services.Data
             .Include(fc => fc.Photos)
             .Include(fc => fc.Comments).ThenInclude(c => c.User)
             .Include(fc => fc.Likes)
+            .Include(fc => fc.Favorites)
             .FirstOrDefaultAsync();
 
             if (fishCatch == null) return null;
@@ -213,6 +226,7 @@ namespace FinFinder.Services.Data
                 PublisherId = fishCatch.User.Id,
                 LikesCount = fishCatch.Likes.Count,
                 IsLikedByCurrentUser = userId.HasValue && fishCatch.Likes.Any(l => l.UserId == userId.Value),
+                IsFavorite = userId.HasValue && fishCatch.Favorites.Any(f => f.UserId == userId.Value),
                 Comments = fishCatch.Comments.Select(c => new CommentViewModel
                 {
                     Id = c.Id,
@@ -289,11 +303,26 @@ namespace FinFinder.Services.Data
            .GetAllAttached()
            .Where(fc => fc.Id == id && fc.UserId == userId && fc.IsDeleted == false)
            .Include(fc => fc.Photos)
-           .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync();
 
             if (fishCatch == null)
-                return null;
+            {
+                return null; // Fish catch not found
+            }
 
+            // Retrieve the user object
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                return null; // User not found
+            }
+
+            // Check if the user is authorized
+            var isAdmin = await _userManager.IsInRoleAsync(user, "Administrator");
+            if (fishCatch.UserId != userId && !isAdmin)
+            {
+                return null; // Unauthorized
+            }
             var fishingTechniques = await _fishingTechniqueRepository.GetAllAsync();
 
             return new FishCatchEditViewModel
@@ -336,7 +365,24 @@ namespace FinFinder.Services.Data
            .FirstOrDefaultAsync();
 
             if (fishCatch == null)
-                return false;
+            {
+                return false; // Fish catch not found
+            }
+
+            // Retrieve the user object
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                return false; // User not found
+            }
+
+            // Check if the user is authorized
+            var isAdmin = await _userManager.IsInRoleAsync(user, "Administrator");
+            if (fishCatch.UserId != userId && !isAdmin)
+            {
+                return false; // Unauthorized
+            }
+
 
             // Update FishCatch details
             fishCatch.Species = model.Species;

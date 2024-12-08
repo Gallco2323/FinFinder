@@ -38,16 +38,19 @@ namespace FinFinder.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var success = await _fishCatchService.PermanentDeleteFishCatchAsync(id, userId);
+            var fishCatch = await _fishCatchService.GetFishCatchByIdAsync(id);
+
+            if (fishCatch == null)
+            {
+                return NotFound("Fish catch not found.");
+            }
+
+            // Pass the creator's UserId to the existing service method
+            var success = await _fishCatchService.PermanentDeleteFishCatchAsync(id, fishCatch.UserId);
 
             if (!success)
             {
-                TempData["Error"] = "Failed to delete the post. It may not exist or you lack permission.";
-            }
-            else
-            {
-                TempData["Success"] = "Post deleted successfully.";
+                ModelState.AddModelError("", "An error occurred while deleting the fish catch.");
             }
 
             return RedirectToAction(nameof(Index));

@@ -23,6 +23,7 @@ namespace FinFinder.Web.ViewModels.FishCatch
         public double Weight { get; set; }
         public double Length { get; set; }
 
+        public bool IsFavorite { get; set; } = false; 
         // Updated Location
         [Required]
         public string LocationName { get; set; } // Display-friendly name

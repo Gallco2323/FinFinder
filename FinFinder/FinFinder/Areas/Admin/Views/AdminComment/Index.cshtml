@@ -1,0 +1,44 @@
+﻿@using FinFinder.Web.ViewModels.Comment
+@model IEnumerable<CommentViewModel>
+
+@{
+   
+    ViewData["Title"] = "Manage Comments";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Adjust path as per your project structure
+}
+
+<h1>Manage Comments</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Fish Catch</th>
+            <th>Content</th>
+            <th>Created</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var comment in Model)
+        {
+            <tr>
+                <td>@comment.UserName</td>
+                <td>
+                    <a asp-area="" asp-controller="FishCatch" asp-action="Details" asp-route-id="@comment.FishCatchId">
+                        View Post
+                    </a>
+                </td>
+                <td>@comment.Content</td>
+                <td>@comment.DateCreated.ToString("MMMM dd, yyyy")</td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@comment.Id" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
