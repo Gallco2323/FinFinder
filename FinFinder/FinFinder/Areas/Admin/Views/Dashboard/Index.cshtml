@@ -32,7 +32,8 @@
                 <div class="card-body">
                     <h5 class="card-title text-success">Total Fish Catches</h5>
                     <p class="display-4 fw-bold text-dark">@Model.TotalFishCatches</p>
-                    <a asp-controller="FishCatch" asp-action="Index" class="btn btn-outline-success btn-sm">Manage Posts</a>
+                    <a asp-area="Admin" asp-controller="AdminFishCatch" asp-action="Index" class="btn btn-outline-success btn-sm">Manage Posts</a>
+
                 </div>
             </div>
         </div>

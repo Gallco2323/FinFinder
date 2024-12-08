@@ -18,5 +18,7 @@ namespace FinFinder.Services.Data.Interfaces
         Task<bool> AddToFavoritesAsync(Guid fishCatchId, Guid userId);
         Task<bool> SoftDeleteFishCatchAsync(Guid fishCatchId, Guid userId);
         Task<bool> PermanentDeleteFishCatchAsync(Guid fishCatchId, Guid userId);
+        Task<IEnumerable<ManageFishCatchViewModel>> GetAllFishCatchesAsync();
+
     }
 }

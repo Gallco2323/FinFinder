@@ -59,6 +59,25 @@ namespace FinFinder.Services.Data
             await _favoriteRepository.AddAsync(favorite);
             return true;
         }
+        public async Task<IEnumerable<ManageFishCatchViewModel>> GetAllFishCatchesAsync()
+        {
+            var fishCatches = await _fishCatchRepository.GetAllAttached()
+                .Include(fc => fc.User) // Include publisher details
+                .Include(fc => fc.Photos) // Include photos
+                .ToListAsync();
+
+            return fishCatches.Select(fc => new ManageFishCatchViewModel
+            {
+                Id = fc.Id,
+                Species = fc.Species,
+                LocationName = fc.LocationName,
+                PublisherName = fc.User.UserName,
+                DateCaught = fc.DateCaught,
+                PhotoURLs = fc.Photos.Select(p => p.Url).ToList(),
+                IsDeleted = fc.IsDeleted
+            });
+        }
+
 
         public async Task<bool> CreateFishCatchAsync(FishCatchCreateViewModel model, Guid userId)
         {

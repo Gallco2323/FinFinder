@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "32qG7jDgw787xNXVqdmSEbb82uzrhoKVcV49jGBXLTw=",
+  "Hash": "7VPq1x/7/CmTrm8ALwLBoUGD3JeH2DyytP4vkpwZtO4=",
   "Source": "FinFinder.Web",
   "BasePath": "_content/FinFinder.Web",
   "Mode": "Default",
@@ -1271,6 +1271,25 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\187c9c99-18fc-4773-bd4d-ad2bf383d167_original.jpeg",
+      "SourceId": "FinFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\",
+      "BasePath": "_content/FinFinder.Web",
+      "RelativePath": "images/187c9c99-18fc-4773-bd4d-ad2bf383d167_original.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\187c9c99-18fc-4773-bd4d-ad2bf383d167_original.jpeg"
+    },
+    {
       "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\378328d2-b0ff-4a77-8e9c-dbe495f3eccb_trout.webp",
       "SourceId": "FinFinder.Web",
       "SourceType": "Discovered",
@@ -1442,6 +1461,25 @@
       "OriginalItemSpec": "wwwroot\\images\\9141652f-23f1-4d7e-81ac-b40eae302bd2_Capture.PNG"
     },
     {
+      "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\94561b73-0be6-4c62-888e-231b0f7ef808_Pike2.jpg",
+      "SourceId": "FinFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\",
+      "BasePath": "_content/FinFinder.Web",
+      "RelativePath": "images/94561b73-0be6-4c62-888e-231b0f7ef808_Pike2.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\94561b73-0be6-4c62-888e-231b0f7ef808_Pike2.jpg"
+    },
+    {
       "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\9828b006-be6c-4af6-8f82-0b102fa925fc_b55im3-scaled-1.jpg",
       "SourceId": "FinFinder.Web",
       "SourceType": "Discovered",
@@ -1537,6 +1575,25 @@
       "OriginalItemSpec": "wwwroot\\images\\ab8360e8-e886-49d4-91a3-9de790fda99b_Pike2.jpg"
     },
     {
+      "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\b68aa0f2-466b-42bf-a999-08b4469b8b26_Grass carp.webp",
+      "SourceId": "FinFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\",
+      "BasePath": "_content/FinFinder.Web",
+      "RelativePath": "images/b68aa0f2-466b-42bf-a999-08b4469b8b26_Grass carp.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\b68aa0f2-466b-42bf-a999-08b4469b8b26_Grass carp.webp"
+    },
+    {
       "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\ba60f643-cf5f-4e21-8e6a-593c88e244c4_Grass carp.webp",
       "SourceId": "FinFinder.Web",
       "SourceType": "Discovered",
@@ -1554,6 +1611,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\ba60f643-cf5f-4e21-8e6a-593c88e244c4_Grass carp.webp"
+    },
+    {
+      "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\bd1ec43d-ac7d-4e3f-ac72-d903df77d297_trout.webp",
+      "SourceId": "FinFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\",
+      "BasePath": "_content/FinFinder.Web",
+      "RelativePath": "images/bd1ec43d-ac7d-4e3f-ac72-d903df77d297_trout.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\bd1ec43d-ac7d-4e3f-ac72-d903df77d297_trout.webp"
     },
     {
       "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\c783de43-849c-482e-9bdb-36203d48abd1_Screenshot 2024-11-14 090051.png",
@@ -1820,6 +1896,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\profiles\\60905ae1-8b3e-4af1-9ecd-ad1f482915a3_ehh.webp"
+    },
+    {
+      "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\profiles\\632c818e-64f9-4e4c-be07-fb68470e5a90_pesho.png",
+      "SourceId": "FinFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\",
+      "BasePath": "_content/FinFinder.Web",
+      "RelativePath": "images/profiles/632c818e-64f9-4e4c-be07-fb68470e5a90_pesho.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\profiles\\632c818e-64f9-4e4c-be07-fb68470e5a90_pesho.png"
     },
     {
       "Identity": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\profiles\\6fcd433f-04d4-44b4-a370-6fc939cbbbdc_original.jpeg",
