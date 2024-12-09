@@ -96,6 +96,11 @@ namespace FinFinder.Services.Data
 
         public async Task<bool> UnhidePostAsync(Guid userId, Guid fishCatchId)
         {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
+            {
+                return false; // User not found
+            }
             var fishCatch = await _fishCatchRepository.GetAllAttached()
                 .FirstOrDefaultAsync(fc => fc.Id == fishCatchId && fc.UserId == userId);
 
@@ -105,6 +110,7 @@ namespace FinFinder.Services.Data
             }
 
             fishCatch.IsDeleted = false;
+            user.FishCount++;
             await _fishCatchRepository.UpdateAsync(fishCatch);
             return true;
         }

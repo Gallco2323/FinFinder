@@ -1,16 +1,29 @@
 ﻿using FinFinder.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+
 
 namespace FinFinder.Data.Seeders
 {
-    public static class SeedData
+    public  class SeedData
     {
+        private readonly FinFinderDbContext _context;
+        private readonly ILogger<SeedData> _logger;
+      
+
+        public SeedData(FinFinderDbContext context, ILogger<SeedData> logger)
+        {
+            _context = context;
+            _logger = logger;
+            
+        }
         public static async Task SeedRolesAsync(RoleManager<IdentityRole<Guid>> roleManager, UserManager<ApplicationUser> userManager)
         {
             var roles = new[] { "User", "Administrator" };
@@ -44,5 +57,8 @@ namespace FinFinder.Data.Seeders
                 }
             }
         }
+
+       
     }
 }
+

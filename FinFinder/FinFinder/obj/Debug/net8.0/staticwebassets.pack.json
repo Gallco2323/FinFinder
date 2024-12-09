@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\data\\FishCatches.json",
+      "PackagePath": "staticwebassets\\data\\FishCatches.json"
+    },
+    {
       "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
@@ -99,6 +103,14 @@
     {
       "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\c8d08cb5-c8a3-41af-94e7-1b805e03cf17_original.jpeg",
       "PackagePath": "staticwebassets\\images\\c8d08cb5-c8a3-41af-94e7-1b805e03cf17_original.jpeg"
+    },
+    {
+      "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\d2a3c2c1-e3af-47d7-9cb5-0626bd74ea99_Screenshot 2024-12-08 235416.png",
+      "PackagePath": "staticwebassets\\images\\d2a3c2c1-e3af-47d7-9cb5-0626bd74ea99_Screenshot 2024-12-08 235416.png"
+    },
+    {
+      "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\d6ab1da6-d5b6-4ef3-a6ed-dc3e27220af0_Screenshot 2024-12-08 235746.png",
+      "PackagePath": "staticwebassets\\images\\d6ab1da6-d5b6-4ef3-a6ed-dc3e27220af0_Screenshot 2024-12-08 235746.png"
     },
     {
       "Id": "D:\\Programming\\C#Web_2024\\Final Exam ASP.Net\\FinFinder\\FinFinderSolution\\FinFinder\\FinFinder\\wwwroot\\images\\d8829083-025c-4289-ade3-d2066abf1116_Screenshot 2024-11-14 090051.png",

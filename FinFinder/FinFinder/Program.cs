@@ -82,7 +82,7 @@ namespace FinFinder
 
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error/500"); // Redirect to custom 500 page
                 app.UseStatusCodePagesWithReExecute("/Error/{0}"); // Redirect to custom error pages like 404

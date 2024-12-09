@@ -87,6 +87,11 @@ namespace FinFinder.Services.Data
 
         public async Task<bool> CreateFishCatchAsync(FishCatchCreateViewModel model, Guid userId)
         {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
+            {
+                return false; // User not found
+            }
             var fishCatch = new FishCatch
             {
                 Id = Guid.NewGuid(),
@@ -103,6 +108,9 @@ namespace FinFinder.Services.Data
             };
 
             await _fishCatchRepository.AddAsync(fishCatch);
+
+            user.FishCount ++;  
+            
 
             if (model.PhotoFiles != null && model.PhotoFiles.Any())
             {
@@ -240,6 +248,11 @@ namespace FinFinder.Services.Data
 
         public async Task<bool> PermanentDeleteFishCatchAsync(Guid fishCatchId, Guid userId)
         {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
+            {
+                return false; // User not found
+            }
             var fishCatch = await _fishCatchRepository.GetAllAttached()
        .Include(fc => fc.Photos)
        .Include(fc => fc.Comments)
@@ -285,6 +298,7 @@ namespace FinFinder.Services.Data
             }
 
             await _fishCatchRepository.DeleteAsync(fishCatch.Id);
+            user.FishCount --;
             return true;
         }
 
@@ -343,6 +357,11 @@ namespace FinFinder.Services.Data
 
         public async Task<bool> SoftDeleteFishCatchAsync(Guid fishCatchId, Guid userId)
         {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
+            {
+                return false; // User not found
+            }
             var fishCatch = await _fishCatchRepository
             .GetAllAttached()
             .Where(fc => fc.Id == fishCatchId && fc.UserId == userId && fc.IsDeleted == false)
@@ -352,6 +371,7 @@ namespace FinFinder.Services.Data
                 return false;
 
             fishCatch.IsDeleted = true;
+            user.FishCount --;
             await _fishCatchRepository.UpdateAsync(fishCatch);
             return true;
         }
