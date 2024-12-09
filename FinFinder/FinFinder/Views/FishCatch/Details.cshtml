@@ -1,4 +1,6 @@
 ﻿@using FinFinder.Web.ViewModels.FishCatch;
+@using System.Security.Claims
+
 @model FishCatchDetailsViewModel
 
 @{
@@ -83,7 +85,7 @@
             <!-- Action Buttons -->
             <div class="d-flex justify-content-between">
                 <!-- Edit/Delete Buttons (Only for Publisher) -->
-                @if (User?.Identity?.Name == @Model.PublisherName )
+                @if (Guid.Parse(User?.FindFirstValue(ClaimTypes.NameIdentifier)) == @Model.PublisherId)
                 {
                     <div class="d-flex justify-content-start gap-2">
                         <!-- Edit Button -->
@@ -122,7 +124,7 @@
                 }
 
                 <!-- Add to Favorites Button (Only for Other Users) -->
-                @if (User?.Identity?.Name != @Model.PublisherName && User.Identity?.IsAuthenticated == true)
+                @if (Guid.Parse(User?.FindFirstValue(ClaimTypes.NameIdentifier)) != @Model.PublisherId && User.Identity?.IsAuthenticated == true)
                 {
                     <form asp-action="AddToFavorites" method="post" class="mt-3">
                         <input type="hidden" name="id" value="@Model.Id" />

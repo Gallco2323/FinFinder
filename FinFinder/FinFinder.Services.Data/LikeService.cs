@@ -1,6 +1,7 @@
 ﻿using FinFinder.Data.Models;
 using FinFinder.Data.Repository.Interfaces;
 using FinFinder.Services.Data.Interfaces;
+using FinFinder.Web.ViewModels.FishCatch;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -55,5 +56,28 @@ namespace FinFinder.Services.Data
             await _likeRepository.DeleteAsync(like.Id);
             return true;
         }
+
+        public async Task<IEnumerable<FishCatchIndexViewModel>> GetLikedPostsAsync(Guid userId)
+        {
+            var likedPosts = await _likeRepository
+                .GetAllAttached()
+                .Where(l => l.UserId == userId)
+                .Include(l => l.FishCatch)
+                .ThenInclude(fc => fc.Photos)
+                .Include(l => l.FishCatch.User)
+                .Select(l => new FishCatchIndexViewModel
+                {
+                    Id = l.FishCatch.Id,
+                    Species = l.FishCatch.Species,
+                    LocationName = l.FishCatch.LocationName,
+                    DateCaught = l.FishCatch.DateCaught,
+                    PhotoURLs = l.FishCatch.Photos.Select(p => p.Url).ToList(),
+                    PublisherName = l.FishCatch.User.UserName
+                })
+                .ToListAsync();
+
+            return likedPosts;
+        }
+
     }
 }

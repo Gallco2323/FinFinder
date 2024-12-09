@@ -42,7 +42,7 @@ namespace FinFinder
             .AddEntityFrameworkStores<FinFinderDbContext>();
 
 
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+          
 
             //builder.Services.AddScoped<IRepository<FishCatch, Guid>, BaseRepository<FishCatch, Guid>>();
             //builder.Services.AddScoped<IRepository<FishingTechnique, Guid>, BaseRepository<FishingTechnique, Guid>>();
@@ -84,13 +84,12 @@ namespace FinFinder
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseMigrationsEndPoint();
+                app.UseExceptionHandler("/Error/500"); // Redirect to custom 500 page
+                app.UseStatusCodePagesWithReExecute("/Error/{0}"); // Redirect to custom error pages like 404
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                app.UseDeveloperExceptionPage(); // Default developer page for debugging
             }
 
             app.UseHttpsRedirection();

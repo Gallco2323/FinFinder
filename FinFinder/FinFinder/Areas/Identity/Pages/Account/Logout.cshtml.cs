@@ -28,15 +28,15 @@ namespace FinFinder.Web.Areas.Identity.Pages.Account
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            if (returnUrl != null)
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl) && returnUrl != "/Admin")
             {
+                // Redirect only if the return URL is valid and not the /Admin page
                 return LocalRedirect(returnUrl);
             }
             else
             {
-                // This needs to be a redirect so that the browser performs a new
-                // request and the identity for the user gets updated.
-                return RedirectToPage();
+                // Redirect to the homepage or another public page
+                return RedirectToPage("/Account/Login");
             }
         }
     }

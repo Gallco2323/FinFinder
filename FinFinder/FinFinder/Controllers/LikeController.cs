@@ -49,6 +49,15 @@ namespace FinFinder.Web.Controllers
 
             return RedirectToAction("Details", "FishCatch", new { id = fishCatchId });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> LikedPosts()
+        {
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var likedPosts = await _likeService.GetLikedPostsAsync(userId);
+
+            return View(likedPosts);
+        }
     }
 
 }

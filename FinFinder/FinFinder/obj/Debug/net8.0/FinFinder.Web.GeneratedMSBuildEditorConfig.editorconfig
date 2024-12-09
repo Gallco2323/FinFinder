@@ -78,6 +78,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Programming/C\#Web_2024/Final Exam ASP.Net/FinFinder/FinFinderSolution/FinFinder/FinFinder/Views/Error/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcTm90Rm91bmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Programming/C\#Web_2024/Final Exam ASP.Net/FinFinder/FinFinderSolution/FinFinder/FinFinder/Views/Error/ServerError.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcU2VydmVyRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Programming/C\#Web_2024/Final Exam ASP.Net/FinFinder/FinFinderSolution/FinFinder/FinFinder/Views/Favorites/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmF2b3JpdGVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -104,6 +112,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Programming/C\#Web_2024/Final Exam ASP.Net/FinFinder/FinFinderSolution/FinFinder/FinFinder/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Programming/C\#Web_2024/Final Exam ASP.Net/FinFinder/FinFinderSolution/FinFinder/FinFinder/Views/Like/LikedPosts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlrZVxMaWtlZFBvc3RzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Programming/C\#Web_2024/Final Exam ASP.Net/FinFinder/FinFinderSolution/FinFinder/FinFinder/Views/Profile/Details.cshtml]

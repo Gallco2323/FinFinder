@@ -1,0 +1,33 @@
+﻿@using FinFinder.Web.ViewModels.FishCatch
+@model IEnumerable<FishCatchIndexViewModel>
+
+<h1>Your Liked Posts</h1>
+
+<div class="row">
+    @if (Model.Any())
+    {
+        @foreach (var post in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@post.PhotoURLs.FirstOrDefault()" class="card-img-top" alt="@post.Species" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@post.Species</h5>
+                        <p class="card-text">
+                            <strong>Location:</strong> @post.LocationName <br />
+                            <strong>Date Caught:</strong> @post.DateCaught.ToString("MMMM dd, yyyy") <br />
+                            <strong>Posted by:</strong> @post.PublisherName
+                        </p>
+                        <a asp-controller="FishCatch" asp-action="Details" asp-route-id="@post.Id" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-12 text-center">
+            <p class="text-muted">You haven't liked any posts yet.</p>
+        </div>
+    }
+</div>
