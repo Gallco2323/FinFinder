@@ -318,3 +318,5 @@ D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFind
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder\obj\Debug\net8.0\FinFinder.Web.pdb
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder\obj\Debug\net8.0\FinFinder.Web.genruntimeconfig.cache
 D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder\obj\Debug\net8.0\ref\FinFinder.Web.dll
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder\bin\Debug\net8.0\Castle.Core.dll
+D:\Programming\C#Web_2024\Final Exam ASP.Net\FinFinder\FinFinderSolution\FinFinder\FinFinder\bin\Debug\net8.0\Moq.dll

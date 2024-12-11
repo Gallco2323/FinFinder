@@ -146,28 +146,28 @@ namespace FinFinder.Services.Data
         public async Task<FishCatchFilterViewModel> GetFilteredFishCatchesAsync(string selectedFilter, string searchTerm)
         {
             var fishCatches = await _fishCatchRepository
-            .GetAllAttached()
-            .Where(fc => fc.IsDeleted == false)
-            .Include(fc => fc.User)
-            .Include(fc => fc.Photos)
-            .Include(fc => fc.Likes)
-            .ToListAsync();
+     .GetAllAttached()
+     .Where(fc => fc.IsDeleted == false)
+     .Include(fc => fc.User)
+     .Include(fc => fc.Photos)
+     .Include(fc => fc.Likes)
+     .ToListAsync();
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 fishCatches = fishCatches.Where(fc =>
-                    fc.Species.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-                    fc.LocationName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-                    fc.User.UserName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+                    (fc.Species?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
+                    (fc.LocationName?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
+                    (fc.User?.UserName?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false)).ToList();
             }
 
             switch (selectedFilter)
             {
                 case "MostLiked":
-                    fishCatches = fishCatches.OrderByDescending(fc => fc.Likes.Count).ToList();
+                    fishCatches = fishCatches.OrderByDescending(fc => fc.Likes?.Count ?? 0).ToList();
                     break;
                 case "LeastLiked":
-                    fishCatches = fishCatches.OrderBy(fc => fc.Likes.Count).ToList();
+                    fishCatches = fishCatches.OrderBy(fc => fc.Likes?.Count ?? 0).ToList();
                     break;
                 case "Alphabetical":
                     fishCatches = fishCatches.OrderBy(fc => fc.Species).ToList();
@@ -181,21 +181,21 @@ namespace FinFinder.Services.Data
             {
                 SelectedFilter = selectedFilter,
                 Filters = new List<SelectListItem>
-            {
-                new SelectListItem { Value = "DatePosted", Text = "Date Posted" },
-                new SelectListItem { Value = "MostLiked", Text = "Most Liked" },
-                new SelectListItem { Value = "LeastLiked", Text = "Least Liked" },
-                new SelectListItem { Value = "Alphabetical", Text = "Alphabetical" }
-            },
+        {
+            new SelectListItem { Value = "DatePosted", Text = "Date Posted" },
+            new SelectListItem { Value = "MostLiked", Text = "Most Liked" },
+            new SelectListItem { Value = "LeastLiked", Text = "Least Liked" },
+            new SelectListItem { Value = "Alphabetical", Text = "Alphabetical" }
+        },
                 FishCatches = fishCatches.Select(fc => new FishCatchIndexViewModel
                 {
                     Id = fc.Id,
-                    Species = fc.Species,
-                    LocationName = fc.LocationName,
+                    Species = fc.Species ?? "Unknown Species",
+                    LocationName = fc.LocationName ?? "Unknown Location",
                     DateCaught = fc.DateCaught,
-                    PhotoURLs = fc.Photos.Select(p => p.Url).ToList(),
-                    PublisherName = fc.User.UserName,
-                    LikesCount = fc.Likes.Count
+                    PhotoURLs = fc.Photos?.Select(p => p.Url).ToList() ?? new List<string>(),
+                    PublisherName = fc.User?.UserName ?? "Unknown User",
+                    LikesCount = fc.Likes?.Count ?? 0
                 }).ToList(),
                 SearchTerm = searchTerm
             };

@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinFinder.Web.ViewModels", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinFinder.Common", "Common\FinFinder.Common.csproj", "{7639DF36-B652-4AAE-8A76-A23AECEB32F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinFinder.Services.Mapping", "FinFinder.Services.Mapping\FinFinder.Services.Mapping.csproj", "{079BF1DC-CE01-4CF9-A26F-FE12674F98EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinFinder.Services.Mapping", "FinFinder.Services.Mapping\FinFinder.Services.Mapping.csproj", "{079BF1DC-CE01-4CF9-A26F-FE12674F98EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinFinder.Tests", "FinFinder.Tests\FinFinder.Tests.csproj", "{49B9BFAC-6B0F-4F74-A4CF-D446D7469912}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{079BF1DC-CE01-4CF9-A26F-FE12674F98EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{079BF1DC-CE01-4CF9-A26F-FE12674F98EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{079BF1DC-CE01-4CF9-A26F-FE12674F98EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49B9BFAC-6B0F-4F74-A4CF-D446D7469912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49B9BFAC-6B0F-4F74-A4CF-D446D7469912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49B9BFAC-6B0F-4F74-A4CF-D446D7469912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49B9BFAC-6B0F-4F74-A4CF-D446D7469912}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
