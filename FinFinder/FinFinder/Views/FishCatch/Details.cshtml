@@ -81,11 +81,21 @@
                     <a asp-action="Details" asp-controller="Profile" asp-route-id="@Model.PublisherId" class="fw-bold">@Model.PublisherName</a>
                 </span>
             </div>
+            @{
+                Guid? currentUserId = null;
+                if (User?.Identity?.IsAuthenticated == true)
+                {
+                    var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    if (!string.IsNullOrEmpty(userIdClaim) && Guid.TryParse(userIdClaim, out Guid parsedId))
+                    {
+                        currentUserId = parsedId;
+                    }
+                }
+            }
 
             <!-- Action Buttons -->
             <div class="d-flex justify-content-between">
-                <!-- Edit/Delete Buttons (Only for Publisher) -->
-                @if (Guid.Parse(User?.FindFirstValue(ClaimTypes.NameIdentifier)) == @Model.PublisherId)
+                @if (currentUserId.HasValue && currentUserId == Model.PublisherId)
                 {
                     <div class="d-flex justify-content-start gap-2">
                         <!-- Edit Button -->
@@ -120,11 +130,8 @@
                             </div>
                         </div>
                     </div>
-
                 }
-
-                <!-- Add to Favorites Button (Only for Other Users) -->
-                @if (Guid.Parse(User?.FindFirstValue(ClaimTypes.NameIdentifier)) != @Model.PublisherId && User.Identity?.IsAuthenticated == true)
+                else if (currentUserId.HasValue && currentUserId != Model.PublisherId)
                 {
                     <form asp-action="AddToFavorites" method="post" class="mt-3">
                         <input type="hidden" name="id" value="@Model.Id" />
@@ -134,9 +141,9 @@
                     </form>
                 }
 
-                <!-- Back to List Button -->
                 <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
+
         </div>
     </div>
     <h3>Comments</h3>
